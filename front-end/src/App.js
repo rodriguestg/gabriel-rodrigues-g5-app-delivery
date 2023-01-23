@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       <Route path="/seller/orders/:id" />
       <Route path="/seller/orders" />
       <Route path="/admin/manage" />
-      <Route path="/" />
+      <Route path="/" component={ Login } />
     </Switch>
   );
 }
