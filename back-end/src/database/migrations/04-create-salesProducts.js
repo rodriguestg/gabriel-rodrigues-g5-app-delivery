@@ -13,7 +13,7 @@ module.exports = {
           key: 'id',
         }
       },
-      products_id: {
+      product_id: {
         type: Sequelize.INTEGER,
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',

@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING,
       },
-      delivery_id: {
+      delivery_number: {
         allowNull: false,
         type: DataTypes.STRING,
       },
@@ -44,9 +44,13 @@ module.exports = (sequelize, DataTypes) => {
     });
   
     Sale.associate = (models) => {
-      User.belongsTo(models.User, {
+      Sale.belongsTo(models.User, {
         as: 'users',
         foreignKey: 'user_id',
+      }),
+      Sale.belongsTo(models.User, {
+        as: 'seller',
+        foreignKey: 'seller_id',
       })
     }
     
