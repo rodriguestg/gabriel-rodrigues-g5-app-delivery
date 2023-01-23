@@ -1,8 +1,4 @@
-export const setUserLocalStorage = (user) => {
-  console.log(user);
-};
-
-export const getUserLocalStorage = () => {
+export default getUserLocalStorage = () => {
   const user = JSON.parse(localStorage.getItem('user'));
   return user;
 };
