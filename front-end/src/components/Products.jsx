@@ -23,7 +23,6 @@ export default function Products() {
         <p
           data-testid="customer_products__checkout-bottom-value"
         >
-          Ver Carrinho: R$
           {sum.toFixed(2).replace('.', ',')}
         </p>
       </button>
