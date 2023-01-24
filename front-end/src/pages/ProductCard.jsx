@@ -22,6 +22,7 @@ function ProductCard() {
               src={ product.url_image }
               alt="imagem de um produto"
               srcSet=""
+              width={ 100 }
             />
             <button
               type="button"

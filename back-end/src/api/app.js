@@ -1,12 +1,15 @@
 const express = require('express');
 const cors = require('cors');
 const productRouter = require('./routes/productRouter');
+const path = require('path')
 
 const LoginController = require('./controller/login.controller');
 
 const app = express();
 
 app.use(cors());
+
+app.use('/images', express.static(path.resolve(__dirname, 'images')));
 
 app.use(productRouter);
 
