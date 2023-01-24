@@ -6,10 +6,23 @@ import fetchUtil from '../utils/fetchUtil';
 export default function Login() {
   const history = useHistory();
   const [error, setError] = useState(false);
+  const [Email, setEmail] = useState('');
+  const [Password, setPassword] = useState('');
+  const [Button, setButton] = useState('');
 
   useEffect(() => {
     if (history.location.pathname === '/') history.push('/login');
   }, []);
+
+  useEffect(() => {
+    const number = 6;
+    const valid = /\S+@\S+\.\S+/;
+    if (valid.test(Email) && Password.length > number) {
+      setButton(false);
+    } if (!valid.test(Email) || Password.length < number) {
+      setButton(true);
+    }
+  }, [Email, Password]);
 
   const { register, handleSubmit } = useForm();
   const onClickSubmit = async (data) => {
@@ -36,6 +49,9 @@ export default function Login() {
           placeholder="email"
           id="email"
           { ...register('email') }
+          onChange={ ({ target }) => {
+            setEmail(target.value);
+          } }
         />
         <input
           data-testid="common_login__input-password"
@@ -43,10 +59,14 @@ export default function Login() {
           placeholder="password"
           id="password"
           { ...register('password', { min: 6 }) }
+          onChange={ ({ target }) => {
+            setPassword(target.value);
+          } }
         />
         <button
           data-testid="common_login__button-login"
           type="submit"
+          disabled={ Button }
         >
           Login
         </button>
