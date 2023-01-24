@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 export default function Login() {
   const history = useHistory();
+
   useEffect(() => {
     if (history.location.pathname === '/') history.push('/login');
   }, []);
