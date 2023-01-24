@@ -25,6 +25,7 @@ function ProductCard() {
             />
             <button
               type="button"
+              data-testid={`customer_products__button-card-add-item-${product.id}`}
               onClick={ () => increaseQuantity(product.id) }
             >
               +
@@ -33,11 +34,12 @@ function ProductCard() {
               data-testid={ `customer_products__input-card-quantity-${product.id}` }
               type="number"
               value={ cart.find((c) => c.id === product.id)
-                ? cart.find((c) => c.id === product.id).quantity || '' : '' }
+                ? cart.find((c) => c.id === product.id).quantity : '' }
               onChange={ ({ target }) => changeQuantity(product.id, target.value) }
               placeholder="0"
             />
             <button
+              data-testid={`customer_products__button-card-rm-item-${product.id}`}
               type="button"
               onClick={ () => decreaseQuantity(product.id) }
             >
