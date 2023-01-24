@@ -6,4 +6,10 @@ const getSellerOrders = async (req, res) => {
   res.status(200).json(sales);
 };
 
-module.exports = { getSellerOrders };
+const getSaleProducts = async (req, res) => {
+  const sale = await SaleService.findSaleProducts(req.params.saleId);
+
+  res.status(200).json(sale);
+};
+
+module.exports = { getSellerOrders, getSaleProducts };

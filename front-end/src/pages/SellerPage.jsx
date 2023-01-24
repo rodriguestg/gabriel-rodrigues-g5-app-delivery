@@ -20,7 +20,8 @@ export default function SellerPage() {
     <div>
       <NavBar />
       <main>
-        { sales.length && sales.map((sale) => <SaleCard sale={ sale } key={ sale.id } />)}
+        { sales.length
+         && sales.map((sale) => <SaleCard sale={ sale } key={ sale.id } />)}
 
       </main>
     </div>

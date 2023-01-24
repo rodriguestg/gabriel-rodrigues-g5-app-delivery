@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 export default function SaleCard({ sale }) {
   const { id,
@@ -12,7 +13,7 @@ export default function SaleCard({ sale }) {
   const date = new Date(saleDate).getDate();
 
   return (
-    <div>
+    <Redirect to={ `/seller/orders/${id}` }>
       <p data-testid={ `seller_orders__element-order-id-${id}` }>{id}</p>
       <p data-testid={ `seller_orders__element-delivery-status-${id}` }>{status}</p>
       <p data-testid={ `seller_orders__element-card-address-${id}` }>
@@ -20,7 +21,7 @@ export default function SaleCard({ sale }) {
       </p>
       <p data-testid={ `seller_orders__element-order-date-${id}` }>{date}</p>
       <p data-testid={ `seller_orders__element-card-price-${id}` }>{totalPrice}</p>
-    </div>
+    </Redirect>
   );
 }
 
