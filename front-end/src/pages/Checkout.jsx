@@ -8,22 +8,31 @@ function Checkout() {
   const [address, setAddress] = useState('');
   const [number, setNumber] = useState('');
   const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
-    const sellersResponse = await axios.get('http://localhost:3001/users/sellers');
-    setSellers(sellersResponse.data);
+    try {
+      const sellersResponse = await axios.get('http://localhost:3001/users/sellers');
+      setSellers(sellersResponse.data);
+    } catch (e) {
+      console.log(e);
+    }
 
     const productsLocalStorage = JSON.parse(localStorage.getItem('cart'));
 
     if (productsLocalStorage) {
-      setProducts(productsLocalStorage);
+      const filteredArray = productsLocalStorage
+        .filter((product) => product.quantity !== 0);
+
+      setProducts(filteredArray);
 
       let sum = 0;
-      productsLocalStorage.map((item) => {
-        sum += item.quantity * item.unityValue;
+      filteredArray.map((item) => {
+        sum += item.quantity * item.price;
         return sum;
       });
 
+      setLoading(false);
       setTotal(sum);
     }
   };
@@ -47,73 +56,81 @@ function Checkout() {
       <h3>
         Finalizar Pedido
       </h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Descrição</th>
-            <th>Quantidade</th>
-            <th>Valor Unitário</th>
-            <th>Sub-total</th>
-            <th>Remover Item</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            products.map((item, index) => (
-              <tr key={ index }>
-                <td
-                  data-testid={
-                    `customer_checkout__element-order-table-item-number-${index}`
-                  }
-                >
-                  {index + 1}
-                </td>
-                <td
-                  data-testid={
-                    `customer_checkout__element-order-table-name-${index}`
-                  }
-                >
-                  {item.description}
-                </td>
-                <td
-                  data-testid={
-                    `customer_checkout__element-order-table-quantity-${index}`
-                  }
-                >
-                  {item.quantity}
-                </td>
-                <td
-                  data-testid={
-                    `customer_checkout__element-order-table-unit-price-${index}`
-                  }
-                >
-                  {item.unityValue.toFixed(2).replaceAll('.', ',')}
-                </td>
-                <td
-                  data-testid={
-                    `customer_checkout__element-order-table-sub-total-${index}`
-                  }
-                >
-                  {(item.unityValue * item.quantity).toFixed(2).replaceAll('.', ',')}
-                </td>
-                <td
-                  data-testid={
-                    `customer_checkout__element-order-table-remove-${index}`
-                  }
-                >
-                  <button
-                    type="button"
-                    onClick={ () => removeItem(item) }
-                  >
-                    Remover
-                  </button>
-                </td>
+      {
+        loading ? (
+          <div>
+            Carregando...
+          </div>
+        ) : (
+          <table>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Descrição</th>
+                <th>Quantidade</th>
+                <th>Valor Unitário</th>
+                <th>Sub-total</th>
+                <th>Remover Item</th>
               </tr>
-            ))
-          }
-        </tbody>
-      </table>
+            </thead>
+            <tbody>
+              {
+                products.map((item, index) => (
+                  <tr key={ item.id }>
+                    <td
+                      data-testid={
+                        `customer_checkout__element-order-table-item-number-${index}`
+                      }
+                    >
+                      {index + 1}
+                    </td>
+                    <td
+                      data-testid={
+                        `customer_checkout__element-order-table-name-${index}`
+                      }
+                    >
+                      {item.name}
+                    </td>
+                    <td
+                      data-testid={
+                        `customer_checkout__element-order-table-quantity-${index}`
+                      }
+                    >
+                      {item.quantity}
+                    </td>
+                    <td
+                      data-testid={
+                        `customer_checkout__element-order-table-unit-price-${index}`
+                      }
+                    >
+                      {item.price.toFixed(2).replaceAll('.', ',')}
+                    </td>
+                    <td
+                      data-testid={
+                        `customer_checkout__element-order-table-sub-total-${index}`
+                      }
+                    >
+                      {(item.price * item.quantity).toFixed(2).replaceAll('.', ',')}
+                    </td>
+                    <td
+                      data-testid={
+                        `customer_checkout__element-order-table-remove-${index}`
+                      }
+                    >
+                      <button
+                        type="button"
+                        onClick={ () => removeItem(item) }
+                      >
+                        Remover
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        )
+      }
       <h2 data-testid="customer_checkout__element-order-total-price">
         Total: R$
         {' '}

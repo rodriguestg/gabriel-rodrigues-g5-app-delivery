@@ -17,7 +17,7 @@ function ProductProvider({ children }) {
       id,
       name,
       quantity: 0,
-      price,
+      price: Number(price),
     }));
     setCart(emptyCart);
   };
@@ -35,7 +35,8 @@ function ProductProvider({ children }) {
   const increaseQuantity = (id) => {
     const newCart = cart.map((product) => {
       if (product.id === id) {
-        product.quantity += 1;
+        product.quantity = product.quantity === '' ? product.quantity = 1
+          : product.quantity += 1;
       }
       return product;
     });
@@ -57,7 +58,7 @@ function ProductProvider({ children }) {
   const changeQuantity = (id, value) => {
     const newCart = cart.map((product) => {
       if (product.id === id) {
-        product.quantity = Number(value);
+        product.quantity = value === '' ? value : Number(value);
       }
       return product;
     });
