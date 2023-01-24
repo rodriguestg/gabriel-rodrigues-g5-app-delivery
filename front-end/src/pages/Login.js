@@ -1,0 +1,63 @@
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import fetchUtil from '../utils/fetchUtil';
+
+export default function Login() {
+  const history = useHistory();
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (history.location.pathname === '/') history.push('/login');
+  }, []);
+
+  const { register, handleSubmit } = useForm();
+  const onClickSubmit = async (data) => {
+    const response = await fetchUtil.fetchWithBody('/login', 'POST', data);
+
+    if (response.message === 'Not found') {
+      setError(true);
+    } else {
+      localStorage.setItem('user', JSON.stringify(response));
+      if (response.role === 'customer') return history.push('/customer/products');
+      if (response.role === 'seller') return history.push('/seller/orders');
+      history.push('/admin/manage');
+    }
+  };
+
+  return (
+    <div className="container-login">
+      {error
+      && <p data-testid="common_login__element-invalid-email">Erro ao fazer login</p>}
+      <form className="login" onSubmit={ handleSubmit(onClickSubmit) }>
+        <input
+          data-testid="common_login__input-email"
+          type="email"
+          placeholder="email"
+          id="email"
+          { ...register('email') }
+        />
+        <input
+          data-testid="common_login__input-password"
+          type="password"
+          placeholder="password"
+          id="password"
+          { ...register('password', { min: 6 }) }
+        />
+        <button
+          data-testid="common_login__button-login"
+          type="submit"
+        >
+          Login
+        </button>
+        <button
+          data-testid="common_login__button-register"
+          type="button"
+        >
+          Ainda não tenho conta
+        </button>
+
+      </form>
+    </div>
+  );
+}
