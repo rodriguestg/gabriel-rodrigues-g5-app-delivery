@@ -39,7 +39,7 @@ function Checkout() {
 
   const removeItem = (item) => {
     const filteredArray = products
-      .filter((product) => product.description !== item.description);
+      .filter((product) => product.id !== item.id);
     setProducts(filteredArray);
     localStorage.setItem('cart', JSON.stringify(filteredArray));
   };
@@ -47,6 +47,10 @@ function Checkout() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [products]);
 
   return (
     <div>
@@ -132,8 +136,6 @@ function Checkout() {
         )
       }
       <h2 data-testid="customer_checkout__element-order-total-price">
-        Total: R$
-        {' '}
         {total.toFixed(2).replaceAll('.', ',')}
       </h2>
 
