@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import fetchUtil from '../utils/fetchUtil';
 
@@ -70,13 +70,16 @@ export default function Login() {
         >
           Login
         </button>
-        <button
-          data-testid="common_login__button-register"
-          type="button"
+        <Link
+          to="/register"
         >
-          Ainda não tenho conta
-        </button>
-
+          <button
+            data-testid="common_login__button-register"
+            type="button"
+          >
+            Ainda não tenho conta
+          </button>
+        </Link>
       </form>
     </div>
   );
