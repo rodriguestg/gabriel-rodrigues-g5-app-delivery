@@ -12,7 +12,7 @@ export default function NavBar() {
   const logoutTag = (
     <Link
       to="/"
-      data-testid="customer_products__element-navbar-link-orders"
+      data-testid="customer_products__element-navbar-link-logout"
     >
       Logout
     </Link>
