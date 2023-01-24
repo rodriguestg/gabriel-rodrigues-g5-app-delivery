@@ -1,11 +1,15 @@
 const express = require('express');
 const cors = require('cors');
 const userRouter = require('./routes/userRouter');
+const productRouter = require('./routes/productRouter');
+
 const LoginController = require('./controller/login.controller');
 
 const app = express();
 
 app.use(cors());
+
+app.use(productRouter);
 
 app.use(express.json());
 
