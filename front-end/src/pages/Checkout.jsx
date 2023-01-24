@@ -16,6 +16,7 @@ function Checkout() {
       setSellers(sellersResponse.data);
     } catch (e) {
       console.log(e);
+      console.log(address, number);
     }
 
     const productsLocalStorage = JSON.parse(localStorage.getItem('cart'));
