@@ -1,3 +1,3 @@
-import loginRouter from './login.router';
+const loginRouter = require('./login.router');
 
-export default { loginRouter };
+module.exports = { loginRouter };
