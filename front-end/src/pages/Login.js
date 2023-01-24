@@ -17,7 +17,7 @@ export default function Login() {
   useEffect(() => {
     const number = 6;
     const valid = /\S+@\S+\.\S+/;
-    if (valid.test(Email) && Password.length > number) {
+    if (valid.test(Email) && Password.length >= number) {
       setButton(false);
     } if (!valid.test(Email) || Password.length < number) {
       setButton(true);
