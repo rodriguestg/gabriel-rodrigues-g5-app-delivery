@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import admin from './pages/adminPage';
-import adminPage from './pages/adminPage';
 import Products from './components/Products';
 import ProductProvider from './context/productProvider';
 import Login from './pages/Login';
