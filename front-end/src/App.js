@@ -5,6 +5,7 @@ import admin from './pages/adminPage';
 import Products from './components/Products';
 import ProductProvider from './context/productProvider';
 import Login from './pages/Login';
+import SellerPage from './pages/SellerPage';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
       <Route path="/customer/orders/:id" />
       <Route path="/customer/orders" />
       <Route path="/seller/orders/:id" />
-      <Route path="/seller/orders" />
+      <Route path="/seller/orders" component={ SellerPage } />
       <Route path="/admin/manage" component={ admin } />
       <Route path="/" component={ Login } />
     </Switch>
