@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function OrderCard() {
+export default function OrderCard({ order }) {
   return (
     <div>
       <p data-testid="seller_orders__element-order-id-1">Pedido</p>
@@ -11,3 +12,18 @@ export default function OrderCard() {
     </div>
   );
 }
+
+OrderCard.propTypes = {
+  order: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    userId: PropTypes.number.isRequired,
+    sellerId: PropTypes.number.isRequired,
+    totalPrice: PropTypes.number.isRequired,
+    deliveryAddress: PropTypes.string.isRequired,
+    deliveryNumber: PropTypes.string.isRequired,
+    saleDate: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    user_id: PropTypes.number.isRequired,
+    seller_id: PropTypes.number.isRequired,
+  }).isRequired,
+};
