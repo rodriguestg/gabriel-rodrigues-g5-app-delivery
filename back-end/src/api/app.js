@@ -9,17 +9,15 @@ const app = express();
 
 app.use(cors());
 
-app.use(express.json());
-
 app.use('/images', express.static(path.resolve(__dirname, 'images')));
 
 app.use(productRouter);
 
+app.use(express.json());
+
 app.get('/coffee', (_req, res) => res.status(418).end());
 
 app.use(userRouter);
-
-app.use('orders', route.orderRouter);
 
 app.use('/login', route.loginRouter);
 
