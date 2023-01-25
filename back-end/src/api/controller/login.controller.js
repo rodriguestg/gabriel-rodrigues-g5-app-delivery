@@ -1,3 +1,4 @@
+const { isTokenValid } = require('../service/Auth.service');
 const LoginService = require('../service/LoginService');
 
   const postLogin = async (req, res) => {
@@ -8,4 +9,11 @@ const LoginService = require('../service/LoginService');
     return res.status(200).json(response);
   };
 
-  module.exports = { postLogin };
+  const validateToken = (req, res) => {
+    const { token } = req.body;
+    const result = isTokenValid(token);
+    if (result) return res.status(200).json({ message: 'Valid Token' });
+    return res.status(403).json({ message: 'Invalid Token' });
+  };
+
+  module.exports = { postLogin, validateToken };

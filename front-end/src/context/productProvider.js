@@ -1,16 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useMemo, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import productContext from './productContext';
 
 function ProductProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [sum, setSum] = useState(0);
-
-  const calculateSum = () => {
-    const newSum = cart.reduce((acc, c) => acc + (c.quantity * c.price), 0);
-    setSum(newSum);
-  };
+  const history = useHistory();
 
   const createEmptyCart = (data) => {
     const emptyCart = data.map(({ id, name, price }) => ({
@@ -28,8 +25,26 @@ function ProductProvider({ children }) {
     setProducts(data.data);
   };
 
+  const validateToken = async () => {
+    const { token } = JSON.parse(localStorage.getItem('user')) || {};
+    try {
+      await axios.post('http://localhost:3001/login/token', {
+        token,
+      });
+      fetchProducts();
+    } catch (_error) {
+      history.push('/login');
+    }
+  };
+
+  const calculateSum = () => {
+    const newSum = cart.reduce((acc, c) => acc + (c.quantity * c.price), 0);
+    setSum(newSum);
+  };
+
   useEffect(() => {
-    fetchProducts();
+    validateToken();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const increaseQuantity = (id) => {
@@ -72,6 +87,7 @@ function ProductProvider({ children }) {
     increaseQuantity,
     decreaseQuantity,
     changeQuantity,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     sum }), [products, cart]);
   return (
     <productContext.Provider value={ newContext }>

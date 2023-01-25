@@ -6,29 +6,29 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    user_id: {
+    userId: {
       allowNull: false,
       type: DataTypes.INTEGER,
       foreignKey: true
     },
-    seller_id: {
+    sellerId: {
       allowNull: false,
       type: DataTypes.INTEGER,
       foreignKey: true
     },
-    total_price: {
+    totalPrice: {
       allowNull: false,
       type: DataTypes.DECIMAL,
     },
-    delivery_adress: {
+    deliveryAddress: {
       allowNull: false,
       type: DataTypes.STRING,
     },
-    delivery_number: {
+    deliveryNumber: {
       allowNull: false,
       type: DataTypes.STRING,
     },
-    sale_date: {
+    saleDate: {
       allowNull: false,
       type: DataTypes.DATE,
     },
