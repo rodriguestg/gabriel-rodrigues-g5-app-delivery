@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import ItemTable from '../components/ItemTable';
 import NavBar from '../components/NavBar';
+import HeaderCustomer from '../components/HeaderCustomer';
+import HeaderSeller from '../components/HeaderSeller';
 
 export default function OrderDetails() {
   const [order, setOrder] = useState(undefined);
@@ -28,6 +30,7 @@ export default function OrderDetails() {
   return (
     <div>
       <NavBar />
+      { path === 'customer' ? <HeaderCustomer/> : <HeaderSeller /> }
       <table>
         <thead>
           <tr>
