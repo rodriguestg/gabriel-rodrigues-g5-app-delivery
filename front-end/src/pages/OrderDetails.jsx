@@ -1,0 +1,63 @@
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import ItemTable from '../components/ItemTable';
+import NavBar from '../components/NavBar';
+
+export default function OrderDetails() {
+  const [order, setOrder] = useState(undefined);
+  const [path, setPath] = useState('');
+  const { location: { pathname } } = useHistory();
+
+  const { id } = useParams();
+
+  useState(() => {
+    setPath(pathname.includes('customer') ? 'customer' : 'seller');
+  }, []);
+
+  useEffect(() => {
+    const getOrder = async () => {
+      const response = await (await axios.get(`http://localhost:3001/sales/details/${id}`)).data;
+      console.log(typeof response.totalPrice, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+
+      if (response) setOrder(response);
+    };
+
+    getOrder();
+  }, []);
+
+  return (
+    <div>
+      <NavBar />
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Descrição</th>
+            <th>Quantidade</th>
+            <th>Valor Unitário</th>
+            <th>Sub-total</th>
+          </tr>
+        </thead>
+        <tbody>
+          { order && order.products.map((product, index) => {
+            console.log('rodou map');
+            return (
+              <ItemTable
+                item={ product }
+                path={ pathname }
+                index={ index }
+                key={ index }
+              />
+            );
+          })}
+        </tbody>
+      </table>
+      { order && (
+        <h2 data-testid={ `${path}_checkout__element-order-total-price` }>
+          { (+order.totalPrice).toFixed(2).replaceAll('.', ',')}
+        </h2>)}
+
+    </div>
+  );
+}

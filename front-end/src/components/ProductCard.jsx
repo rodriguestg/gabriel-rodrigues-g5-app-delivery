@@ -19,9 +19,10 @@ function ProductCard() {
             </p>
             <img
               data-testid={ `customer_products__img-card-bg-image-${product.id}` }
-              src={ product.url_image }
+              src={ product.urlImage }
               alt="imagem de um produto"
               srcSet=""
+              width={ 100 }
             />
             <button
               type="button"
