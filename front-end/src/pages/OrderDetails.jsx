@@ -18,7 +18,6 @@ export default function OrderDetails() {
   useEffect(() => {
     const getOrder = async () => {
       const response = await (await axios.get(`http://localhost:3001/sales/details/${id}`)).data;
-      console.log(typeof response.totalPrice, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 
       if (response) setOrder(response);
     };
@@ -40,17 +39,14 @@ export default function OrderDetails() {
           </tr>
         </thead>
         <tbody>
-          { order && order.products.map((product, index) => {
-            console.log('rodou map');
-            return (
-              <ItemTable
-                item={ product }
-                path={ pathname }
-                index={ index }
-                key={ index }
-              />
-            );
-          })}
+          { order && order.products.map((product, index) => (
+            <ItemTable
+              item={ product }
+              path={ pathname }
+              index={ index }
+              key={ index }
+            />
+          ))}
         </tbody>
       </table>
       { order && (

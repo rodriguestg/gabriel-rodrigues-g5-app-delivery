@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function ItemTable({ item, path, index }) {
-  console.log(item);
   return (
     <tr key={ item.id }>
       <td
