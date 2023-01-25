@@ -27,10 +27,26 @@ export default function OrderDetails() {
     getOrder();
   }, []);
 
+  const returnDate = () => {
+    const date = new Date(order.saleDate);
+
+    return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+  };
+
   return (
     <div>
       <NavBar />
-      { path === 'customer' ? <HeaderCustomer/> : <HeaderSeller /> }
+      { path === 'customer'
+        ? (
+          <HeaderCustomer
+            date={ returnDate() }
+            seller={ order }
+          />)
+
+        : (
+          <HeaderSeller
+            date={ returnDate() }
+          />)}
       <table>
         <thead>
           <tr>
