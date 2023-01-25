@@ -24,7 +24,7 @@ function HeaderCustomer({ seller, date }) {
         { seller.status }
       </span>
       <button
-        date-testid="customer_order_details__button-delivery-check"
+        data-testid="customer_order_details__button-delivery-check"
         type="button"
       >
         MARCAR COMO ENTREGUE
