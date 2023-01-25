@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     totalPrice: {
       allowNull: false,
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10, 2),
     },
     deliveryAddress: {
       allowNull: false,

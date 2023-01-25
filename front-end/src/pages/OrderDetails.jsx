@@ -1,11 +1,13 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import ItemTable from '../components/ItemTable';
 import NavBar from '../components/NavBar';
+import HeaderCustomer from '../components/HeaderCustomer';
+import HeaderSeller from '../components/HeaderSeller';
 
 export default function OrderDetails() {
-  const [order, setOrder] = useState({});
+  const [order, setOrder] = useState(undefined);
   const [path, setPath] = useState('');
   const { location: { pathname } } = useHistory();
 
@@ -17,17 +19,34 @@ export default function OrderDetails() {
 
   useEffect(() => {
     const getOrder = async () => {
-      const response = await axios.get(`http://localhost:3001/sales/details/${id}`);
+      const response = await (await axios.get(`http://localhost:3001/sales/details/${id}`)).data;
 
-      if (Array.isArray(response)) setOrder(response[0]);
+      if (response) setOrder(response);
     };
 
     getOrder();
   }, []);
 
+  const returnDate = () => {
+    const date = new Date(order.saleDate);
+
+    return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+  };
+
   return (
     <div>
       <NavBar />
+      { path === 'customer'
+        ? (
+          <HeaderCustomer
+            date={ returnDate() }
+            seller={ order }
+          />)
+
+        : (
+          <HeaderSeller
+            date={ returnDate() }
+          />)}
       <table>
         <thead>
           <tr>
@@ -40,13 +59,20 @@ export default function OrderDetails() {
         </thead>
         <tbody>
           { order && order.products.map((product, index) => (
-            <ItemTable item={ product } path={ pathname } index={ index } key={ index } />
+            <ItemTable
+              item={ product }
+              path={ pathname }
+              index={ index }
+              key={ index }
+            />
           ))}
         </tbody>
       </table>
-      <h2 data-testid={ `${path}_checkout__element-order-total-price` }>
-        {total.toFixed(2).replaceAll('.', ',')}
-      </h2>
+      { order && (
+        <h2 data-testid={ `${path}_checkout__element-order-total-price` }>
+          { (+order.totalPrice).toFixed(2).replaceAll('.', ',')}
+        </h2>)}
+
     </div>
   );
 }

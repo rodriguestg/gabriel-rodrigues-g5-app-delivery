@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function CustomerItemTable({ item, path, index }) {
+export default function ItemTable({ item, path, index }) {
   return (
     <tr key={ item.id }>
       <td
@@ -29,17 +29,17 @@ export default function CustomerItemTable({ item, path, index }) {
           `${path}_order_details__element-order-table-unit-price-${index}`
         }
       >
-        {item.price.toFixed(2).replaceAll('.', ',')}
+        {(+item.price).toFixed(2).replaceAll('.', ',')}
       </td>
       <td
         data-testid={
           `${path}_order_details__element-order-table-sub-total-${index}`
         }
       >
-        {(item.price * item.quantity).toFixed(2).replaceAll('.', ',')}
+        {((+item.price) * item.SaleProduct.quantity).toFixed(2).replaceAll('.', ',')}
       </td>
     </tr>
   );
 }
 
-CustomerItemTable.propTypes = {}.isRequired;
+ItemTable.propTypes = {}.isRequired;

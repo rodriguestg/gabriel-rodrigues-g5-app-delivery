@@ -20,5 +20,6 @@ app.get('/coffee', (_req, res) => res.status(418).end());
 app.use(userRouter);
 
 app.use('/login', route.loginRouter);
+app.use('/sales', route.saleRouter);
 
 module.exports = app;

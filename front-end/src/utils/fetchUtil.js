@@ -9,4 +9,13 @@ const fetchWithBody = async (path, method, payload) => {
   return response;
 };
 
-export default { fetchWithBody };
+const fetchWithoutBody = async (path, method) => {
+  const response = fetch(`http://localhost:3001${path}`, {
+    method,
+  })
+    .then((req) => req.json());
+
+  return response;
+};
+
+export default { fetchWithBody, fetchWithoutBody };

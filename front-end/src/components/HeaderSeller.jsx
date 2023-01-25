@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 function HeaderSeller({ date, status }) {
   const { id } = useParams();
+
   return (
     <div>
       <span data-testid="seller_order_details__element-order-details-label-order-id">

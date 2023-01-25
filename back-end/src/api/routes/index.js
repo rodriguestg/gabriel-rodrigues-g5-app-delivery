@@ -1,4 +1,4 @@
-const loginRouter = require('./login.routerouter');
-const orderRouter = require('./orderRouter');
+const loginRouter = require('./login.router');
+const saleRouter = require('./saleRouter');
 
-module.exports = { loginRouter,  };
+module.exports = { loginRouter, saleRouter };
