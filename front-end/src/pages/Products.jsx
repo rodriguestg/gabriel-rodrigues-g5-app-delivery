@@ -1,16 +1,17 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import productContext from '../context/productContext';
-import ProductCard from '../pages/ProductCard';
-import NavBar from './NavBar';
+import ProductCard from '../components/ProductCard';
+import NavBar from '../components/NavBar';
 
 export default function Products() {
-  const { sum, cart } = useContext(productContext);
   const history = useHistory();
-  const saveCartLocalStorage = () => {
+  const { sum, cart } = useContext(productContext);
+  const saveCartToLocalStorage = () => {
     localStorage.setItem('cart', JSON.stringify(cart));
     history.push('/customer/checkout');
   };
+
   return (
     <>
       <NavBar />
@@ -18,7 +19,7 @@ export default function Products() {
       <button
         data-testid="customer_products__button-cart"
         type="button"
-        onClick={ saveCartLocalStorage }
+        onClick={ saveCartToLocalStorage }
       >
         <p
           data-testid="customer_products__checkout-bottom-value"

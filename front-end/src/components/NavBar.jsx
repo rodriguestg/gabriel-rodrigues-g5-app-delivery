@@ -1,24 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 // import getUserLocalStorage from '../utils/userLocalStorage';
 
 export default function NavBar() {
-  const { name, role } = JSON.parse(localStorage.getItem('user'));
+  const history = useHistory();
+  const user = JSON.parse(localStorage.getItem('user')) || {};
+
+  const clearLocalStorage = () => {
+    localStorage.removeItem('user');
+    history.push('/login');
+  };
+
   const nameTag = (
     <p data-testid="customer_products__element-navbar-user-full-name">
-      { name }
+      { user.name }
     </p>
   );
   const logoutTag = (
     <Link
       to="/"
+      onClick={ clearLocalStorage }
       data-testid="customer_products__element-navbar-link-logout"
     >
       Logout
     </Link>
   );
 
-  if (role === 'customer') {
+  if (user.role === 'customer') {
     return (
       <div>
         <Link
@@ -37,7 +45,7 @@ export default function NavBar() {
         {logoutTag}
       </div>
     );
-  } if (role === 'seller') {
+  } if (user.role === 'seller') {
     return (
       <div>
         <Link
@@ -50,7 +58,7 @@ export default function NavBar() {
         {logoutTag}
       </div>
     );
-  } if (role === 'administrator') {
+  } if (user.role === 'administrator') {
     return (
       <div>
         <Link
@@ -64,4 +72,5 @@ export default function NavBar() {
       </div>
     );
   }
+  return null;
 }
