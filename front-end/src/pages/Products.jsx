@@ -12,6 +12,8 @@ export default function Products() {
     history.push('/customer/checkout');
   };
 
+  const isCartEmpty = () => cart.every((c) => c.quantity === 0 || c.quantity === '');
+
   return (
     <>
       <NavBar />
@@ -20,6 +22,7 @@ export default function Products() {
         data-testid="customer_products__button-cart"
         type="button"
         onClick={ saveCartToLocalStorage }
+        disabled={ isCartEmpty() }
       >
         <p
           data-testid="customer_products__checkout-bottom-value"
