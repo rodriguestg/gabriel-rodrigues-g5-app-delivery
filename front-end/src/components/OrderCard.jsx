@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
 
-export default function SaleCard({ sale }) {
+export default function OrderCard({ sale }) {
   const { id,
     status,
     deliveryAddress,
@@ -13,7 +12,7 @@ export default function SaleCard({ sale }) {
   const date = new Date(saleDate).getDate();
 
   return (
-    <Redirect to={ `/seller/orders/${id}` }>
+    <div>
       <p data-testid={ `seller_orders__element-order-id-${id}` }>{id}</p>
       <p data-testid={ `seller_orders__element-delivery-status-${id}` }>{status}</p>
       <p data-testid={ `seller_orders__element-card-address-${id}` }>
@@ -21,16 +20,17 @@ export default function SaleCard({ sale }) {
       </p>
       <p data-testid={ `seller_orders__element-order-date-${id}` }>{date}</p>
       <p data-testid={ `seller_orders__element-card-price-${id}` }>{totalPrice}</p>
-    </Redirect>
+    </div>
+
   );
 }
 
-SaleCard.propTypes = {
+OrderCard.propTypes = {
   sale: PropTypes.shape({
     id: PropTypes.number.isRequired,
     userId: PropTypes.number.isRequired,
     sellerId: PropTypes.number.isRequired,
-    totalPrice: PropTypes.number.isRequired,
+    totalPrice: PropTypes.string.isRequired,
     deliveryAddress: PropTypes.string.isRequired,
     deliveryNumber: PropTypes.string.isRequired,
     saleDate: PropTypes.string.isRequired,

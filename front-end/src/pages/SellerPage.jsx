@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../components/NavBar';
-import SaleCard from '../components/SaleCard';
+import OrderCard from '../components/OrderCard';
 import fetchUtil from '../utils/fetchUtil';
 
 export default function SellerPage() {
@@ -8,7 +8,7 @@ export default function SellerPage() {
 
   useEffect(() => {
     const getSales = async () => {
-      const response = await fetchUtil.fetchWithoutBody('/sales', 'GET');
+      const response = await fetchUtil.fetchWithoutBody('/sales/1', 'GET');
 
       if (Array.isArray(response)) setSales(response);
     };
@@ -21,7 +21,7 @@ export default function SellerPage() {
       <NavBar />
       <main>
         { sales.length
-         && sales.map((sale) => <SaleCard sale={ sale } key={ sale.id } />)}
+         && sales.map((sale) => <OrderCard sale={ sale } key={ sale.id } />)}
 
       </main>
     </div>
