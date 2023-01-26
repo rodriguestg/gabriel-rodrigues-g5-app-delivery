@@ -7,7 +7,6 @@ export default function OrderCard({ sale }) {
     status,
     deliveryAddress,
     deliveryNumber,
-    saleDate,
     totalPrice } = sale;
   const [currentPath, setCurrentPath] = useState('');
   const history = useHistory();
@@ -16,7 +15,15 @@ export default function OrderCard({ sale }) {
     setCurrentPath('customer');
   }, []);
 
-  const date = new Date(saleDate).getDate();
+  const returnDate = () => {
+    if (sale) {
+      const months = [
+        '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12',
+      ];
+      const date = new Date(sale.saleDate);
+      return `${date.getDate()}/${months[date.getMonth()]}/${date.getFullYear()}`;
+    }
+  };
 
   return (
     <button
@@ -39,10 +46,10 @@ export default function OrderCard({ sale }) {
           </p>)
         : null }
       <p data-testid={ `${currentPath}_orders__element-order-date-${id}` }>
-        {date}
+        {returnDate()}
       </p>
       <p data-testid={ `${currentPath}_orders__element-card-price-${id}` }>
-        {totalPrice}
+        {totalPrice.replace('.', ',')}
       </p>
     </button>
 

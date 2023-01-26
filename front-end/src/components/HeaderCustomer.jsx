@@ -1,8 +1,18 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-function HeaderCustomer({ seller, date }) {
+function HeaderCustomer({ seller }) {
   const { id } = useParams();
+
+  const returnDate = () => {
+    if (seller) {
+      const months = [
+        '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12',
+      ];
+      const date = new Date(seller.saleDate);
+      return `${date.getDate()}/${months[date.getMonth()]}/${date.getFullYear()}`;
+    }
+  };
 
   return (
     <div>
@@ -11,10 +21,10 @@ function HeaderCustomer({ seller, date }) {
         { id }
       </span>
       <span data-testid="customer_order_details__element-order-details-label-seller-name">
-        { seller.users.name }
+        { seller.seller.name }
       </span>
       <span data-testid="customer_order_details__element-order-details-label-order-date">
-        { date }
+        { returnDate() }
       </span>
 
       <span

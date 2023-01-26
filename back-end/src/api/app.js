@@ -22,4 +22,6 @@ app.use(userRouter);
 app.use('/login', route.loginRouter);
 app.use('/sales', route.saleRouter);
 
+app.use('/register', route.registerRouter);
+
 module.exports = app;
