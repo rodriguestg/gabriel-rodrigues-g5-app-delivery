@@ -23,5 +23,6 @@ app.use('/login', route.loginRouter);
 app.use('/sales', route.saleRouter);
 
 app.use('/new-register', route.registerAdmRouter);
+app.use('/register', route.registerRouter);
 
 module.exports = app;
