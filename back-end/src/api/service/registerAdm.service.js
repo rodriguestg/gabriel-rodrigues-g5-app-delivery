@@ -1,35 +1,11 @@
-const { createHash } = require('crypto');
 const registerModel = require('../Model/registerAdmModel');
-
-const DADOS_CRIPTOGRAFAR = {
-  algoritmo: 'sha256',
-  segredo: 'secret',
-  tipo: 'hex',
-};
-
-const criptografar = (senha) => {
-const hash = createHash(DADOS_CRIPTOGRAFAR.algoritmo, DADOS_CRIPTOGRAFAR.segredo);
-hash.update(senha);
-return hash.digest(DADOS_CRIPTOGRAFAR.tipo);
-};
+const md5 = require('md5');
 
 const newRegister = async (user) => {
-    const passHash = criptografar(user.password);
+    const passHash = md5(user.password);
+    console.log(user);
 
-    let newRole;
-    switch (user.role) {
-    case 'Vendedor':
-      newRole = 'seller';
-      break;
-    case 'Administrador':
-      newRole = 'administrator';
-    break;
-    default:
-      newRole = 'customer';
-      break;
-    }
-
-   const register = await registerModel.newRegister({ ...user, password: passHash, role: newRole });
+   const register = await registerModel.newRegister({ ...user, password: passHash });
     console.log(register);
     return register;
     };
