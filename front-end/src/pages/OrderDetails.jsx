@@ -17,21 +17,24 @@ export default function OrderDetails() {
     setPath(pathname.includes('customer') ? 'customer' : 'seller');
   }, []);
 
+  const getOrder = async () => {
+    const response = await (await axios.get(`http://localhost:3001/sales/details/${id}`)).data;
+
+    if (response) setOrder(response);
+  };
+
   useEffect(() => {
-    const getOrder = async () => {
-      const response = await (await axios.get(`http://localhost:3001/sales/details/${id}`)).data;
-
-      if (response) setOrder(response);
-    };
-
     getOrder();
   }, []);
 
   const returnDate = () => {
     if (order) {
+      const months = [
+        '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12',
+      ];
       const date = new Date(order.saleDate);
 
-      return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+      return `${date.getDate()}/${months[date.getMonth()]}/${date.getFullYear()}`;
     }
   };
 
@@ -43,6 +46,7 @@ export default function OrderDetails() {
           ? (
             <HeaderCustomer
               seller={ order }
+              date={ returnDate() }
             />
           ) : (
             <HeaderSeller

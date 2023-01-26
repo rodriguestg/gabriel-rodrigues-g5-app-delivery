@@ -1,16 +1,15 @@
+import axios from 'axios';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-function HeaderCustomer({ seller }) {
+function HeaderCustomer({ seller, date }) {
   const { id } = useParams();
 
-  const returnDate = () => {
-    if (seller) {
-      const months = [
-        '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12',
-      ];
-      const date = new Date(seller.saleDate);
-      return `${date.getDate()}/${months[date.getMonth()]}/${date.getFullYear()}`;
+  const updateOrder = () => {
+    const url = 'http://localhost:3001/sales';
+
+    if (seller.status === 'Em Trânsito') {
+      axios.patch(url, { status: 'Entregue', id });
     }
   };
 
@@ -24,7 +23,7 @@ function HeaderCustomer({ seller }) {
         { seller.seller.name }
       </span>
       <span data-testid="customer_order_details__element-order-details-label-order-date">
-        { returnDate() }
+        { date }
       </span>
 
       <span
@@ -36,7 +35,8 @@ function HeaderCustomer({ seller }) {
       <button
         data-testid="customer_order_details__button-delivery-check"
         type="button"
-        disabled
+        disabled={ seller.status !== 'Em Trânsito' }
+        onClick={ updateOrder }
       >
         MARCAR COMO ENTREGUE
       </button>

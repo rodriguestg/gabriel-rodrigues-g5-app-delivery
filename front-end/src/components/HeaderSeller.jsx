@@ -1,8 +1,21 @@
+import axios from 'axios';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-function HeaderSeller({ date, status }) {
+function HeaderSeller({ date, status, updatePage }) {
   const { id } = useParams();
+
+  const updateOrder = () => {
+    const url = 'http://localhost:3001/sales';
+    console.log('rodou fetch');
+    if (status === 'Pendente') {
+      axios.patch(url, { status: 'Preparando', id });
+    } else if (status === 'Preparando') {
+      axios.patch(url, { status: 'Em Trânsito', id });
+    }
+
+    updatePage();
+  };
 
   return (
     <div>
@@ -22,12 +35,16 @@ function HeaderSeller({ date, status }) {
       <button
         data-testid="seller_order_details__button-preparing-check"
         type="button"
+        disabled={ status !== 'Pendente' }
+        onClick={ updateOrder }
       >
         PREPARAR PEDIDO
       </button>
       <button
         data-testid="seller_order_details__button-dispatch-check"
         type="button"
+        disabled={ status !== 'Preparando' }
+        onClick={ updateOrder }
       >
         SAIU PARA ENTREGA
       </button>

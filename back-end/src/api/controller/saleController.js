@@ -28,4 +28,14 @@ const postSale = async (req, res) => {
   res.status(201).json({ id });
 };
 
-module.exports = { getSellerOrders, getSaleProducts, postSale, getCustomerOrders };
+const patchSale = async (req, res) => {
+  const affectedRows = await SaleService.updateSale(req.body);
+
+  if(affectedRows) return res.status(200).json({ affectedRows });
+
+  return res.status(404).json({ message: 'Sale not found' });
+}
+
+module.exports = {
+   getSellerOrders,
+    getSaleProducts, postSale, getCustomerOrders, patchSale };
