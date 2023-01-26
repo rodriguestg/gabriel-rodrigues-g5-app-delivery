@@ -8,7 +8,7 @@ const getSellers = async (request, response) => {
 const getAll = async (_request, response) => {
   const users = await getAllUsers();
   response.status(200).json(users);
-}
+};
 
 module.exports = {
   getSellers,

@@ -22,8 +22,8 @@ const getUserId = async (email) => {
 
 const getAll = async () => {
   const users = await User.findAll({});
-  return users
-}
+  return users;
+};
 
 module.exports = {
   getSellers,
