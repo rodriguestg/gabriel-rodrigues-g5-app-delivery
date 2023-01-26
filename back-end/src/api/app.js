@@ -21,4 +21,6 @@ app.use(userRouter);
 
 app.use('/login', route.loginRouter);
 
+app.use('/new-register', route.registerRouter);
+
 module.exports = app;

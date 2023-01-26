@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 // import NavBar from '../components/NavBar';
 
@@ -24,9 +25,26 @@ export default function AdminPage() {
     }
   }, [email, password, role, fullName]);
 
+  const postUser = async () => {
+    try {
+      axios.defaults
+        .headers.post.Authorization = JSON.parse(localStorage.getItem('user'));
+      // console.log(axios.defaults.headers.post.Authorization);
+      const data = await axios.post('http://localhost:3001/new-register', {
+        fullName,
+        email,
+        password,
+        role,
+      });
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
-      {/* <NavBar /> */}
+      {/* { NavBar() } */}
       <h1>Cadastrar novo usuário</h1>
       <form>
         <label htmlFor="fullName">
@@ -80,6 +98,7 @@ export default function AdminPage() {
           data-testid="admin_manage__button-register"
           type="button"
           disabled={ btnStatus }
+          onClick={ postUser }
         >
           Cadastrar
         </button>
