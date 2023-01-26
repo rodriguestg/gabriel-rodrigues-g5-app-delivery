@@ -5,7 +5,7 @@ const app =  require('../../api/app')
 const mocha = require('mocha')
 const { User } = require('../../database/models')
 const jwt = require('jsonwebtoken')
-const { findOneMock, expectedLoginResult } = require('./login.mock')
+const { findOneMock, expectedOutput } = require('./login.mock')
 
 chai.use(chaiHttp)
 
@@ -22,7 +22,7 @@ describe('Testa a Rota POST /login', () => {
             password: '$#zebirita#$'
         })
         expect(chaiHttpResponse).status(200)
-        expect(chaiHttpResponse.body).to.be.deep.equal(expectedLoginResult)
+        expect(chaiHttpResponse.body).to.be.deep.equal(expectedOutput)
     })
 
     it('Testa retorna 404 caso o email não seja passado', async () => {
