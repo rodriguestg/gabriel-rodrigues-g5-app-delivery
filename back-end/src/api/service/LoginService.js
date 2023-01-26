@@ -11,13 +11,13 @@ const Auth = require('./Auth.service');
       const correct = passwordMd5 === user.password;
 
       if (correct) {
- return {
+        return {
         name: user.name,
         email,
-        token: Auth.createToken(email),
+        token: Auth.createToken(user.id),
         role: user.role,
-      }; 
-}
+        }; 
+      }
     }
 
     return undefined;

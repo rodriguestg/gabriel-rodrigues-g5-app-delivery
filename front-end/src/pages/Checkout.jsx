@@ -1,19 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import NavBar from '../components/NavBar';
 
 function Checkout() {
   const [products, setProducts] = useState([]);
   const [sellers, setSellers] = useState([]);
-  // const [address, setAddress] = useState('');
-  // const [number, setNumber] = useState('');
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
+
+  const { register, handleSubmit, setValue } = useForm();
+
+  const history = useHistory();
+
+  const calculateTotal = () => {
+    let sum = 0;
+    products.map((item) => {
+      sum += item.quantity * item.price;
+      return sum;
+    });
+
+    setTotal(sum);
+  };
 
   const fetchData = async () => {
     try {
       const sellersResponse = await axios.get('http://localhost:3001/users/sellers');
       setSellers(sellersResponse.data);
+      setValue('seller', sellersResponse.data[0].id);
     } catch (e) {
       console.log(e);
     }
@@ -25,16 +40,9 @@ function Checkout() {
         .filter((product) => product.quantity !== 0);
 
       setProducts(filteredArray);
-
-      let sum = 0;
-      filteredArray.map((item) => {
-        sum += item.quantity * item.price;
-        return sum;
-      });
-
-      setLoading(false);
-      setTotal(sum);
     }
+    calculateTotal();
+    setLoading(false);
   };
 
   const removeItem = (item) => {
@@ -42,6 +50,8 @@ function Checkout() {
       .filter((product) => product.id !== item.id);
     setProducts(filteredArray);
     localStorage.setItem('cart', JSON.stringify(filteredArray));
+
+    calculateTotal();
   };
 
   useEffect(() => {
@@ -49,8 +59,27 @@ function Checkout() {
   }, []);
 
   useEffect(() => {
-    fetchData();
+    calculateTotal();
   }, [products]);
+
+  const finishOrder = async ({ address, number, seller }) => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const saleBody = {
+      token: user.token,
+      sale: {
+        sellerId: seller,
+        totalPrice: total,
+        deliveryAddress: address,
+        deliveryNumber: number,
+        saleDate: new Date(),
+        status: 'Pendente',
+      },
+      products: products.map(({ id: productId, quantity }) => ({ productId, quantity })),
+    };
+
+    const { data: { id } } = await axios.post('http://localhost:3001/sales', saleBody, { headers: { authorization: user.token } });
+    history.push(`/customer/orders/${id}`);
+  };
 
   return (
     <div>
@@ -142,17 +171,17 @@ function Checkout() {
       <h3>
         Detalhes e Endereço para Entrega
       </h3>
-      <form action="">
+      <form onSubmit={ handleSubmit(finishOrder) }>
         <label htmlFor="sellers">
           <select
             name="sellers"
             id="sellers"
-            onChange={ (e) => setSelectedSeller(e.target.value) }
             data-testid="customer_checkout__select-seller"
+            { ...register('seller') }
           >
             {
               sellers.map(({ name, id }) => (
-                <option key={ id } value={ name }>{name}</option>
+                <option key={ id } value={ id }>{name}</option>
               ))
             }
           </select>
@@ -163,8 +192,8 @@ function Checkout() {
             type="text"
             id="address"
             placeholder="Travessa Terceira, Bairro Muruci"
-            onChange={ (e) => setAddress(e.target.value) }
             data-testid="customer_checkout__input-address"
+            { ...register('address') }
           />
         </label>
         <label htmlFor="number">
@@ -173,8 +202,8 @@ function Checkout() {
             type="text"
             id="number"
             placeholder="198"
-            onChange={ (e) => setNumber(e.target.value) }
             data-testid="customer_checkout__input-address-number"
+            { ...register('number') }
           />
         </label>
         <button
