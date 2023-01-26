@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import fetchUtil from '../utils/fetchUtil';
 
 export default function Register() {
+  const history = useHistory();
   const [error, setError] = useState(false);
   const [Name, setName] = useState('');
   const [Email, setEmail] = useState('');
@@ -22,18 +24,24 @@ export default function Register() {
 
   const { register, handleSubmit } = useForm();
   const onClickSubmit = async (data) => {
-    const response = await fetchUtil.fetchWithBody('/register', 'POST', data);
-
-    if (response.message === 'Not found') {
-      setError(true);
-    }
+    // console.log(data);
+    await fetchUtil
+      .fetchWithBody('/register', 'POST', { ...data, role: 'customer' });
+    console.log(data);
+    // if (response.message === 'Not found') {
+    //   setError(true);
+    // }
+    const login = await fetchUtil.fetchWithBody('/login', 'POST', data);
+    localStorage.setItem('user', JSON.stringify(login));
+    if (login) return history.push('/customer/products');
+    // console.log(response);
   };
 
   return (
     <div className="container-register">
       {error
       && <p data-testid="common_login__element-invalid-email">Erro ao fazer cadastro</p>}
-      <form className="REGISTER" onSubmit={ handleSubmit(onClickSubmit) }>
+      <form className="register" onSubmit={ handleSubmit(onClickSubmit) }>
         Cadastro
         <input
           data-testid="common_register__input-name"
