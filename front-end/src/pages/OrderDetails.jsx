@@ -17,13 +17,13 @@ export default function OrderDetails() {
     setPath(pathname.includes('customer') ? 'customer' : 'seller');
   }, []);
 
+  const getOrder = async () => {
+    const response = await (await axios.get(`http://localhost:3001/sales/details/${id}`)).data;
+
+    if (response) setOrder(response);
+  };
+
   useEffect(() => {
-    const getOrder = async () => {
-      const response = await (await axios.get(`http://localhost:3001/sales/details/${id}`)).data;
-
-      if (response) setOrder(response);
-    };
-
     getOrder();
   }, []);
 
@@ -52,6 +52,7 @@ export default function OrderDetails() {
             <HeaderSeller
               date={ returnDate() }
               status={ order.status }
+              updatePage={ getOrder }
             />
           )
       )}

@@ -8,5 +8,6 @@ router.get('/user/:email', SaleController.getCustomerOrders);
 router.get('/details/:saleId', SaleController.getSaleProducts);
 router.get('/', SaleController.getSellerOrders);
 router.post('/', SaleController.postSale);
+router.patch('/', SaleController.patchSale);
 
 module.exports = router;
