@@ -12,6 +12,8 @@ export default function Login() {
 
   useEffect(() => {
     if (history.location.pathname === '/') history.push('/login');
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) history.push('/customer/products');
   }, []);
 
   useEffect(() => {

@@ -19,8 +19,16 @@ export default function OrderCard({ sale }) {
   const date = new Date(saleDate).getDate();
 
   return (
-    <div>
-      <p data-testid={ `${currentPath}_orders__element-order-id-${id}` }>{id}</p>
+    <button
+      onClick={ () => (currentPath === 'seller' ? history.push(`/seller/orders/${id}`)
+        : history.push(`/customer/orders/${id}`)) }
+      type="button"
+    >
+      <p
+        data-testid={ `${currentPath}_orders__element-order-id-${id}` }
+      >
+        {id}
+      </p>
       <p data-testid={ `${currentPath}_orders__element-delivery-status-${id}` }>
         {status}
       </p>
@@ -36,7 +44,7 @@ export default function OrderCard({ sale }) {
       <p data-testid={ `${currentPath}_orders__element-card-price-${id}` }>
         {totalPrice}
       </p>
-    </div>
+    </button>
 
   );
 }

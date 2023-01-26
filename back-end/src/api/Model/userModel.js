@@ -13,14 +13,14 @@ const getSellers = async () => {
 const getUserId = async (email) => {
   const { id } = await User.findOne({
     where: {
-      email
-    }
-  })
+      email,
+    },
+  });
 
-  return id
-}
+  return id;
+};
 
 module.exports = {
   getSellers,
-  getUserId
+  getUserId,
 };

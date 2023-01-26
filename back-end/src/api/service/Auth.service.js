@@ -5,7 +5,7 @@ const fs = require('fs');
 
 const secret = fs.readFileSync('./jwt.evaluation.key', 'utf-8');
 
-const createToken = (email) => jwt.sign(email, secret);
+const createToken = (id) => jwt.sign(id, secret);
 
 const isTokenValid = (token) => {
   try {
@@ -16,4 +16,13 @@ const isTokenValid = (token) => {
   }
 };
 
-module.exports = { createToken, isTokenValid };
+const decodeToken = (token) => {
+  try {
+    const id = jwt.verify(token, secret);
+    return id;
+  } catch (error) {
+    return undefined;
+  }
+};
+
+module.exports = { createToken, isTokenValid, decodeToken };
