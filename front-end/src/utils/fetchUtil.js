@@ -5,8 +5,16 @@ const fetchWithBody = async (path, method, payload) => {
     body: JSON.stringify(payload),
   })
     .then((req) => req.json());
+  return response;
+};
+
+const fetchWithoutBody = async (path, method) => {
+  const response = fetch(`http://localhost:3001${path}`, {
+    method,
+  })
+    .then((req) => req.json());
 
   return response;
 };
 
-export default { fetchWithBody };
+export default { fetchWithBody, fetchWithoutBody };
