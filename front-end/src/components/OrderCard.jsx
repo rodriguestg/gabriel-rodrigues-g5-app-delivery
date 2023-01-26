@@ -20,7 +20,8 @@ export default function OrderCard({ sale }) {
 
   return (
     <button
-      onClick={ () => history.push(`/seller/orders/${id}`) }
+      onClick={ () => (currentPath === 'seller' ? history.push(`/seller/orders/${id}`)
+        : history.push(`/customer/orders/${id}`)) }
       type="button"
     >
       <p
@@ -31,9 +32,12 @@ export default function OrderCard({ sale }) {
       <p data-testid={ `${currentPath}_orders__element-delivery-status-${id}` }>
         {status}
       </p>
-      <p data-testid={ `${currentPath}_orders__element-card-address-${id}` }>
-        {`${deliveryAddress}, ${deliveryNumber}`}
-      </p>
+      {currentPath === 'seller'
+        ? (
+          <p data-testid={ `$seller_orders__element-card-address-${id}` }>
+            {`${deliveryAddress}, ${deliveryNumber}`}
+          </p>)
+        : null }
       <p data-testid={ `${currentPath}_orders__element-order-date-${id}` }>
         {date}
       </p>

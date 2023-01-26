@@ -5,7 +5,6 @@ const fetchWithBody = async (path, method, payload) => {
     body: JSON.stringify(payload),
   })
     .then((req) => req.json());
-
   return response;
 };
 

@@ -78,7 +78,6 @@ function Checkout() {
     };
 
     const { data: { id } } = await axios.post('http://localhost:3001/sales', saleBody, { headers: { authorization: user.token } });
-
     history.push(`/customer/orders/${id}`);
   };
 

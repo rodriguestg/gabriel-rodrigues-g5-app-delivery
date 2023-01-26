@@ -10,6 +10,17 @@ const getSellers = async () => {
   return sellers;
 };
 
+const getUserId = async (email) => {
+  const { id } = await User.findOne({
+    where: {
+      email,
+    },
+  });
+
+  return id;
+};
+
 module.exports = {
   getSellers,
+  getUserId,
 };

@@ -1,3 +1,4 @@
+const saleModel = require('../Model/saleModel');
 const { Sale, Product, User, SaleProduct } = require('../../database/models');
 const { decodeToken } = require('./Auth.service');
 
@@ -5,6 +6,11 @@ const findSellerSales = async (tokenSellerId) => {
   const sellerId = decodeToken(tokenSellerId);
   const sales = await Sale.findAll({ where: { sellerId } });
 
+  return sales;
+};
+
+const getCustomerSales = async (email) => {
+  const sales = await saleModel.getCustomerSales(email);
   return sales;
 };
 
@@ -32,4 +38,4 @@ const createSale = async (saleData) => {
   return saleId;
 };
 
-module.exports = { findSellerSales, findSaleProducts, createSale };
+module.exports = { findSellerSales, findSaleProducts, createSale, getCustomerSales };
