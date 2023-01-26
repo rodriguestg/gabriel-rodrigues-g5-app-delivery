@@ -5,11 +5,11 @@ import fetchUtil from '../utils/fetchUtil';
 
 export default function Register() {
   const history = useHistory();
-  const [error, setError] = useState(false);
   const [Name, setName] = useState('');
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
   const [Button, setButton] = useState('');
+  const error = false;
 
   useEffect(() => {
     const numberPassword = 6;
@@ -24,17 +24,11 @@ export default function Register() {
 
   const { register, handleSubmit } = useForm();
   const onClickSubmit = async (data) => {
-    // console.log(data);
     await fetchUtil
       .fetchWithBody('/register', 'POST', { ...data, role: 'customer' });
-    console.log(data);
-    // if (response.message === 'Not found') {
-    //   setError(true);
-    // }
     const login = await fetchUtil.fetchWithBody('/login', 'POST', data);
     localStorage.setItem('user', JSON.stringify(login));
     if (login) return history.push('/customer/products');
-    // console.log(response);
   };
 
   return (

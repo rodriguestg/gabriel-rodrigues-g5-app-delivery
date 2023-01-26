@@ -5,8 +5,8 @@ import NavBar from '../components/NavBar';
 function Checkout() {
   const [products, setProducts] = useState([]);
   const [sellers, setSellers] = useState([]);
-  const [address, setAddress] = useState('');
-  const [number, setNumber] = useState('');
+  // const [address, setAddress] = useState('');
+  // const [number, setNumber] = useState('');
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
 
@@ -16,7 +16,6 @@ function Checkout() {
       setSellers(sellersResponse.data);
     } catch (e) {
       console.log(e);
-      console.log(address, number);
     }
 
     const productsLocalStorage = JSON.parse(localStorage.getItem('cart'));
