@@ -27,7 +27,6 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
        });
-
   },
 
   async down (queryInterface, Sequelize) {
