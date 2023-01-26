@@ -24,6 +24,9 @@ const findSaleProducts = async (saleId) => {
     }, {
       model: User,
       as: 'users',
+    }, {
+      model: User,
+      as: 'seller',
     }] });
 
     return sales;
