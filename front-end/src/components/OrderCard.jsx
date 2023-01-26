@@ -24,9 +24,12 @@ export default function OrderCard({ sale }) {
       <p data-testid={ `${currentPath}_orders__element-delivery-status-${id}` }>
         {status}
       </p>
-      <p data-testid={ `${currentPath}_orders__element-card-address-${id}` }>
-        {`${deliveryAddress}, ${deliveryNumber}`}
-      </p>
+      {currentPath === 'seller'
+        ? (
+          <p data-testid={ `$seller_orders__element-card-address-${id}` }>
+            {`${deliveryAddress}, ${deliveryNumber}`}
+          </p>)
+        : null }
       <p data-testid={ `${currentPath}_orders__element-order-date-${id}` }>
         {date}
       </p>

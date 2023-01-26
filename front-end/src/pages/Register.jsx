@@ -22,6 +22,7 @@ export default function Register() {
 
   const { register, handleSubmit } = useForm();
   const onClickSubmit = async (data) => {
+    console.log(data);
     const response = await fetchUtil.fetchWithBody('/register', 'POST', data);
 
     if (response.message === 'Not found') {
