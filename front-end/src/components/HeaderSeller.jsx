@@ -5,13 +5,13 @@ import { useParams } from 'react-router-dom';
 function HeaderSeller({ date, status, updatePage }) {
   const { id } = useParams();
 
-  const updateOrder = () => {
+  const updateOrder = async () => {
     const url = 'http://localhost:3001/sales';
     console.log('rodou fetch');
     if (status === 'Pendente') {
-      axios.patch(url, { status: 'Preparando', id });
+      await axios.patch(url, { status: 'Preparando', id });
     } else if (status === 'Preparando') {
-      axios.patch(url, { status: 'Em Trânsito', id });
+      await axios.patch(url, { status: 'Em Trânsito', id });
     }
 
     updatePage();

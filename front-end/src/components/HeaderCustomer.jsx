@@ -2,15 +2,17 @@ import axios from 'axios';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-function HeaderCustomer({ seller, date }) {
+function HeaderCustomer({ seller, date, updatePage }) {
   const { id } = useParams();
 
-  const updateOrder = () => {
+  const updateOrder = async () => {
     const url = 'http://localhost:3001/sales';
 
     if (seller.status === 'Em Trânsito') {
-      axios.patch(url, { status: 'Entregue', id });
+      await axios.patch(url, { status: 'Entregue', id });
     }
+
+    updatePage();
   };
 
   return (

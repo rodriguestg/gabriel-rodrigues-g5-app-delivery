@@ -47,11 +47,13 @@ export default function OrderDetails() {
             <HeaderCustomer
               seller={ order }
               date={ returnDate() }
+              updatePage={ getOrder }
             />
           ) : (
             <HeaderSeller
               date={ returnDate() }
               status={ order.status }
+              updatePage={ getOrder }
             />
           )
       )}
