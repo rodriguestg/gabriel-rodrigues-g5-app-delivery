@@ -1,4 +1,4 @@
-const expectedLoginResult = {
+const expectedOutput = {
     "name": "Cliente Zé Birita",
     "email": "zebirita@email.com",
     "token": "eyJhbGciOiJIUzI1NiJ9.Mw.OW7ZXw5IGgg6GVIvvSao2jVyQcDLP2Ld7v9uaYr_b7g",
@@ -13,4 +13,4 @@ const findOneMock = {
       role: 'customer'
   }
 
-  module.exports = { findOneMock, expectedLoginResult }
+  module.exports = { findOneMock, expectedOutput }
