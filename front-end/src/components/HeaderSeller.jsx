@@ -20,13 +20,13 @@ function HeaderSeller({ date, status }) {
         { status }
       </span>
       <button
-        date-testid="seller_order_details__button-preparing-check"
+        data-testid="seller_order_details__button-preparing-check"
         type="button"
       >
         PREPARAR PEDIDO
       </button>
       <button
-        date-testid="seller_order_details__button-dispatch-check"
+        data-testid="seller_order_details__button-dispatch-check"
         type="button"
       >
         SAIU PARA ENTREGA

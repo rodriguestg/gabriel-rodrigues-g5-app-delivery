@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import NavBar from '../components/NavBar';
 import OrderCard from '../components/OrderCard';
-import fetchUtil from '../utils/fetchUtil';
 
 export default function SellerPage() {
   const [sales, setSales] = useState([]);
 
   useEffect(() => {
     const getSales = async () => {
-      const response = await fetchUtil.fetchWithoutBody('/sales/1', 'GET');
+      const { token } = JSON.parse(localStorage.getItem('user'));
+      const { data } = await axios.get('http://localhost:3001/sales', { headers: { authorization: token } });
 
-      if (Array.isArray(response)) setSales(response);
+      if (Array.isArray(data)) setSales(data);
     };
 
     getSales();

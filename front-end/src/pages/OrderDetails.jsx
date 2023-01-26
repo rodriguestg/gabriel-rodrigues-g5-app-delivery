@@ -28,25 +28,30 @@ export default function OrderDetails() {
   }, []);
 
   const returnDate = () => {
-    const date = new Date(order.saleDate);
+    if (order) {
+      const date = new Date(order.saleDate);
 
-    return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+      return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    }
   };
 
   return (
     <div>
       <NavBar />
-      { path === 'customer'
-        ? (
-          <HeaderCustomer
-            date={ returnDate() }
-            seller={ order }
-          />)
-
-        : (
-          <HeaderSeller
-            date={ returnDate() }
-          />)}
+      { order && (
+        path === 'customer'
+          ? (
+            <HeaderCustomer
+              date={ returnDate() }
+              seller={ order }
+            />
+          ) : (
+            <HeaderSeller
+              date={ returnDate() }
+              status={ order.status }
+            />
+          )
+      )}
       <table>
         <thead>
           <tr>
@@ -69,10 +74,9 @@ export default function OrderDetails() {
         </tbody>
       </table>
       { order && (
-        <h2 data-testid={ `${path}_checkout__element-order-total-price` }>
+        <h2 data-testid={ `${path}_order_details__element-order-total-price` }>
           { (+order.totalPrice).toFixed(2).replaceAll('.', ',')}
         </h2>)}
-
     </div>
   );
 }

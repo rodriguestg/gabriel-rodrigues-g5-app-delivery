@@ -49,7 +49,7 @@ export default function NavBar() {
     return (
       <div>
         <Link
-          to="/customer/checkout"
+          to="/seller/orders"
           data-testid="customer_products__element-navbar-link-orders"
         >
           Meus Pedidos
