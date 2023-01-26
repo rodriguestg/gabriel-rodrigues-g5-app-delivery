@@ -28,6 +28,7 @@ function HeaderSeller({ date, status }) {
       <button
         data-testid="seller_order_details__button-dispatch-check"
         type="button"
+        disabled
       >
         SAIU PARA ENTREGA
       </button>
