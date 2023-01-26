@@ -7,7 +7,7 @@ function HeaderSeller({ date, status, updatePage }) {
 
   const updateOrder = () => {
     const url = 'http://localhost:3001/sales';
-
+    console.log('rodou fetch');
     if (status === 'Pendente') {
       axios.patch(url, { status: 'Preparando', id });
     } else if (status === 'Preparando') {
