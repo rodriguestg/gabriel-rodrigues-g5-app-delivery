@@ -42,7 +42,6 @@ export default function OrderDetails() {
         path === 'customer'
           ? (
             <HeaderCustomer
-              date={ returnDate() }
               seller={ order }
             />
           ) : (
