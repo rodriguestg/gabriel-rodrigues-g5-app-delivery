@@ -7,7 +7,6 @@ const newRegister = async (newUser) => {
     password: newUser.password,
     role: newUser.role,
   });
-
   return register;
 };
 
