@@ -66,7 +66,5 @@ OrderCard.propTypes = {
     deliveryNumber: PropTypes.string.isRequired,
     saleDate: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
-    user_id: PropTypes.number.isRequired,
-    seller_id: PropTypes.number.isRequired,
   }).isRequired,
 };
