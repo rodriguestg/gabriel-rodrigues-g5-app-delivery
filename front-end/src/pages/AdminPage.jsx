@@ -11,6 +11,7 @@ export default function AdminPage() {
   const [role, setRole] = useState('seller');
   const [btnStatus, setBtnStatus] = useState(false);
   const [usersAll, setUsersAll] = useState([]);
+  const [errorRegister, setError] = useState(false);
 
   const getAllUsers = async () => {
     const getUsers = await axios.get('http://localhost:3001/users');
@@ -49,7 +50,21 @@ export default function AdminPage() {
         password,
         role,
       });
+      setError(false);
       getAllUsers();
+    } catch (error) {
+      setError(true);
+    }
+  };
+
+  const removeUser = async () => {
+    try {
+      axios.defaults
+        .headers.post.Authorization = token;
+      const userRegister = await axios.post('http://localhost:3001/new-register', {
+        email,
+      });
+      console.log(userRegister);
     } catch (error) {
       console.log(error);
     }
@@ -58,6 +73,9 @@ export default function AdminPage() {
   return (
     <div>
       { NavBar() }
+      { errorRegister
+        ? <p data-testid="admin_manage__element-invalid-register">Erro no cadastro</p>
+        : null }
       <h1>Cadastrar novo usuário</h1>
       <form>
         <label htmlFor="fullName">
@@ -154,7 +172,7 @@ export default function AdminPage() {
                 <td
                   data-testid={ `admin_manage__element-user-table-remove-${index}` }
                 >
-                  Excluir
+                  <button type="button" onClick={ removeUser }>Excluir</button>
                 </td>
               </tr>
             ))
