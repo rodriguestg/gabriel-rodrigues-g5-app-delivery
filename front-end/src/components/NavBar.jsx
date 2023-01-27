@@ -17,13 +17,13 @@ export default function NavBar() {
     </p>
   );
   const logoutTag = (
-    <Link
-      to="/"
+    <button
+      type="button"
       onClick={ clearLocalStorage }
       data-testid="customer_products__element-navbar-link-logout"
     >
       Logout
-    </Link>
+    </button>
   );
 
   if (user.role === 'customer') {
