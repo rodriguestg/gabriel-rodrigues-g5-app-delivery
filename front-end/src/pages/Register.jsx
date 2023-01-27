@@ -34,7 +34,7 @@ export default function Register() {
   return (
     <div className="container-register">
       {error
-      && <p data-testid="common_login__element-invalid-email">Erro ao fazer cadastro</p>}
+      && <p data-testid="common_register__element-invalid_register">Erro no cadastro</p>}
       <form className="register" onSubmit={ handleSubmit(onClickSubmit) }>
         Cadastro
         <input
