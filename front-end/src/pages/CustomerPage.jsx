@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import NavBar from '../components/NavBar';
 import OrderCard from '../components/OrderCard';
 
 function CustomerPage() {
@@ -8,7 +9,6 @@ function CustomerPage() {
   const fetchSale = async () => {
     const { email } = JSON.parse(localStorage.getItem('user'));
     const response = await axios.get(`http://localhost:3001/sales/user/${email}`);
-    console.log(response.data);
     setSales(response.data);
   };
 
@@ -18,6 +18,7 @@ function CustomerPage() {
 
   return (
     <div>
+      <NavBar />
       {
         sales ? sales.map((sale) => (<OrderCard sale={ sale } key={ sale.id } />))
           : <div>Carregando...</div>
