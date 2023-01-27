@@ -16,11 +16,16 @@ const getUserId = async (email) => {
       email,
     },
   });
-
   return id;
+};
+
+const getAll = async () => {
+  const users = await User.findAll({});
+  return users;
 };
 
 module.exports = {
   getSellers,
   getUserId,
+  getAll,
 };

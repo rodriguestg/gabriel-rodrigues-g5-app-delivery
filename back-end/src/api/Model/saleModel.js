@@ -8,7 +8,6 @@ const getCustomerSales = async (email) => {
             userId: id,
         },
     });
-
     return sales;
 };
 

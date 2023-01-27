@@ -1,13 +1,26 @@
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
-// import NavBar from '../components/NavBar';
+import NavBar from '../components/NavBar';
 
 export default function AdminPage() {
-  const index = 1;
+  const history = useHistory();
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('Vendedor');
+  const [role, setRole] = useState('seller');
   const [btnStatus, setBtnStatus] = useState(false);
+  const [usersAll, setUsersAll] = useState([]);
+
+  const getAllUsers = async () => {
+    const getUsers = await axios.get('http://localhost:3001/users');
+    const users = getUsers.data.filter((user) => user.role !== 'administrator');
+    setUsersAll(users);
+  };
+
+  useEffect(() => {
+    getAllUsers();
+  }, []);
 
   useEffect(() => {
     const numberName = 12;
@@ -24,9 +37,27 @@ export default function AdminPage() {
     }
   }, [email, password, role, fullName]);
 
+  const postUser = async () => {
+    try {
+      const { token, role: roleUser } = JSON.parse(localStorage.getItem('user'));
+      if (roleUser !== 'administrator') { history.push('/login'); }
+      axios.defaults
+        .headers.post.Authorization = token;
+      await axios.post('http://localhost:3001/new-register', {
+        fullName,
+        email,
+        password,
+        role,
+      });
+      getAllUsers();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
-      {/* <NavBar /> */}
+      { NavBar() }
       <h1>Cadastrar novo usuário</h1>
       <form>
         <label htmlFor="fullName">
@@ -71,15 +102,16 @@ export default function AdminPage() {
               setRole(target.value);
             } }
           >
-            <option value="Vendedor">Vendedor</option>
-            <option value="Administrador">Administrador</option>
-            <option value="Usuário">Usuário</option>
+            <option value="seller">Vendedor</option>
+            <option value="administrator">Administrador</option>
+            <option value="customer">Usuário</option>
           </select>
         </label>
         <button
           data-testid="admin_manage__button-register"
           type="button"
           disabled={ btnStatus }
+          onClick={ postUser }
         >
           Cadastrar
         </button>
@@ -96,33 +128,37 @@ export default function AdminPage() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td
-              data-testid={ `admin_manage__element-user-table-item-number-${index}` }
-            >
-              1
-            </td>
-            <td
-              data-testid={ `admin_manage__element-user-table-name-${index}` }
-            >
-              Nome
-            </td>
-            <td
-              data-testid={ `admin_manage__element-user-table-email-${index}` }
-            >
-              Email
-            </td>
-            <td
-              data-testid={ `admin_manage__element-user-table-role-${index}` }
-            >
-              Tipo
-            </td>
-            <td
-              data-testid={ `admin_manage__element-user-table-remove-${index}` }
-            >
-              Excluir
-            </td>
-          </tr>
+          {
+            usersAll.map((user, index) => (
+              <tr key={ index }>
+                <td
+                  data-testid={ `admin_manage__element-user-table-item-number-${index}` }
+                >
+                  { user.id }
+                </td>
+                <td
+                  data-testid={ `admin_manage__element-user-table-name-${index}` }
+                >
+                  { user.name }
+                </td>
+                <td
+                  data-testid={ `admin_manage__element-user-table-email-${index}` }
+                >
+                  { user.email }
+                </td>
+                <td
+                  data-testid={ `admin_manage__element-user-table-role-${index}` }
+                >
+                  { user.role }
+                </td>
+                <td
+                  data-testid={ `admin_manage__element-user-table-remove-${index}` }
+                >
+                  Excluir
+                </td>
+              </tr>
+            ))
+          }
         </tbody>
       </table>
     </div>
