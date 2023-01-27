@@ -16,7 +16,6 @@ const getUserId = async (email) => {
       email,
     },
   });
-
   return id;
 };
 
