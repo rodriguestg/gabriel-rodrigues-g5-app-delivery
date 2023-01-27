@@ -206,5 +206,31 @@ const sales_Expected = [
   }
 ]
 
+const sales_Create = {
+  id: 5,
+  sellerId: 2,
+  totalPrice: 123.21,
+  deliveryAddress: 'Rua tal',
+  deliveryNumber: '001',
+  saleDate: '2023-01-27T21:54:12.520Z',
+  status: 'Pendente',
+  userId: '3'
+};
+
+const sales_Update = {
+  "affectedRows": [
+    1
+  ]
+}
+
+const sales_Expected2 = {
+    "affectedRows": {
+      "affectedRows": [
+        1
+      ]
+    }
+}
+
 module.exports = { salesUserEmail_FindOne, salesUserEmail_FindAll, salesUserEmail_Expected,
-   salesDetailsSaleId_FindOne, salesDetailsSaleId_Expected, sales_FindAll, sales_Expected }
+   salesDetailsSaleId_FindOne, salesDetailsSaleId_Expected, sales_FindAll, sales_Expected, 
+   sales_Create, sales_Update, sales_Expected2 }
