@@ -9,7 +9,7 @@ export default function Register() {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
   const [Button, setButton] = useState('');
-  const error = false;
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const numberPassword = 6;
@@ -24,11 +24,15 @@ export default function Register() {
 
   const { register, handleSubmit } = useForm();
   const onClickSubmit = async (data) => {
-    await fetchUtil
+    const registerVerify = await fetchUtil
       .fetchWithBody('/register', 'POST', { ...data, role: 'customer' });
-    const login = await fetchUtil.fetchWithBody('/login', 'POST', data);
-    localStorage.setItem('user', JSON.stringify(login));
-    if (login) return history.push('/customer/products');
+    if (registerVerify.message === 'conflict') {
+      setError(true);
+    } else {
+      const login = await fetchUtil.fetchWithBody('/login', 'POST', data);
+      localStorage.setItem('user', JSON.stringify(login));
+      if (login.role === 'customer') history.push('/customer/products');
+    }
   };
 
   return (
