@@ -20,11 +20,26 @@ describe('Testa a Rota POST /register', () => {
         chaiHttpResponse = await chai.request(app).post('/register').send({
             name: "user user user",
             email: "user@gmail.com",
-            password: 12345678,
+            password: "12345678",
             role: "customer"
         })
 
         expect(chaiHttpResponse).status(201);
         expect(chaiHttpResponse.body).to.be.deep.equal(expectedOutput)
+    })
+
+    describe('Testa a Rota POST /new-register', () => {
+        it('Testa se registra um novo Administrador com SUCESSO', async () => {
+            sinon.stub(User, 'create').resolves(createMock)
+            chaiHttpResponse = await chai.request(app).post('/new-register').send({
+                fullName: "user user user",
+                email: "user@gmail.com",
+                password: "12345678",
+                role: "administrator"
+            })
+
+            expect(chaiHttpResponse).status(201)
+            expect(chaiHttpResponse.body).to.be.deep.equal({ message: 'Created' })
+        })
     })
 })
