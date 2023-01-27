@@ -1,4 +1,4 @@
-// nome de variável: rotaDaApi_Mock ou Expected
+// nome da variável: rotaDaApi_Mock ou Expected
 
 const salesUserEmail_FindOne = {
     id: 3,
