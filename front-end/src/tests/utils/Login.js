@@ -1,4 +1,5 @@
 import userEvent from '@testing-library/user-event';
+import { screen } from '@testing-library/react';
 
 const admin = { email: 'adm@deliveryapp.com', pass: '--adm2@21!!--' };
 const seller = { email: 'fulana@deliveryapp.com', pass: 'fulana@123' };
@@ -25,7 +26,7 @@ const mockAdminLogin = {
   role: 'administrator',
 };
 
-const Login = async (role, screen) => {
+const Login = async (role) => {
   const inputEmail = screen.getByTestId('common_login__input-email');
   const inputPassword = screen.getByTestId('common_login__input-password');
   const buttonLogin = screen.getByRole('button', { name: 'Login' });
