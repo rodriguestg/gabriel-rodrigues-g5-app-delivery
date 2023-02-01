@@ -32,3 +32,17 @@
   display: flex;
   gap: 6px;
 }
+
+@media screen and ( min-width : 600px ) {
+
+  .item-card {
+    height: 140px;
+    max-width: 40%;
+  }
+
+  .item-info-container {
+    flex-direction: row;
+    gap: 80px;
+    justify-content: center;
+  }
+}
