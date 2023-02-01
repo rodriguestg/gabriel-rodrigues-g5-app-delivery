@@ -9,7 +9,7 @@ function HeaderSeller({ date, status, updatePage }) {
     const url = 'http://localhost:3001/sales';
     if (status === 'Pendente') {
       await axios.patch(url, { status: 'Preparando', id });
-    } else if (status === 'Preparando') {
+    } else {
       await axios.patch(url, { status: 'Em Trânsito', id });
     }
 
