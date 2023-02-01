@@ -1,26 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap') ;
 
 :root {
+
   --dark-blue: #162026;
-  --yellow: #F2E307;
-  --light-orange: #F2B90C;
-  --light: #F28A05;
-  --brown: #8C2B03;
-  --green: #47D000;
-  --light-green: #7DBD61;
+
+  --yellow: #f2e307;
+
+  --light-orange: #f2b90c;
+
+  --light: #f28a05;
+
+  --brown: #8c2b03;
+
+  --green: #47d000;
+
+  --light-green: #7dbd61;
 }
 
 * {
-  padding:0;
-  margin:0;
-  vertical-align:baseline;
-  list-style:none;
-  border:0;
-  font-family: 'Source Sans 3', sans-serif;
+  border: 0;
+  font-family: 'Source Sans 3' , sans-serif;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
 }
 
 h1 {
-  font-size: 2.1875rem;
+  font-size: 2.189rem;
 }
 
 h2 {
@@ -28,7 +35,7 @@ h2 {
 }
 
 h3 {
-  font-size: 1.5625rem;
+  font-size: 1.563rem;
 }
 
 h4 {
@@ -48,31 +55,32 @@ p {
 }
 
 
-@media screen and ( min-width: 600px){
+@media screen and ( min-width : 600px ) {
+
   h1 {
     font-size: 3.125rem;
   }
-  
+
   h2 {
     font-size: 2.5rem;
   }
-  
+
   h3 {
     font-size: 1.875rem;
   }
-  
+
   h4 {
-    font-size: 1.5625rem;
+    font-size: 1.563rem;
   }
-  
+
   h5 {
     font-size: 1.25rem;
   }
-  
+
   h6 {
     font-size: 1;
   }
-  
+
   p {
     font-size: 0.75rem;
   }
