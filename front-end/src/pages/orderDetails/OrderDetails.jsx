@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import ItemCard from '../../components/itemCard/ItemCard';
 import NavBar from '../../components/NavBar';
-import HeaderCustomer from '../../components/HeaderCustomer';
-import HeaderSeller from '../../components/HeaderSeller';
+import HeaderCustomer from '../../components/header/HeaderCustomer';
+import HeaderSeller from '../../components/header/HeaderSeller';
+import './orderDetails.css';
 
 export default function OrderDetails() {
   const [order, setOrder] = useState(undefined);
@@ -57,20 +58,29 @@ export default function OrderDetails() {
             />
           )
       )}
+      <main className="item-card-container">
+        { order && order.products.map((product, index) => (
+          <ItemCard
+            item={ product }
+            path={ pathname }
+            index={ index }
+            key={ index }
+          />
+        ))}
+        { order && (
+          <h4
+            data-testid={ `${path}_order_details__element-order-total-price` }
+            className="total-price-order"
+          >
+            <span className="total-span">Total </span>
+            <span className="price-span">
+              R$
+              { (+order.totalPrice).toFixed(2).replaceAll('.', ',')}
+            </span>
 
-      { order && order.products.map((product, index) => (
-        <ItemCard
-          item={ product }
-          path={ pathname }
-          index={ index }
-          key={ index }
-        />
-      ))}
+          </h4>)}
+      </main>
 
-      { order && (
-        <h2 data-testid={ `${path}_order_details__element-order-total-price` }>
-          { (+order.totalPrice).toFixed(2).replaceAll('.', ',')}
-        </h2>)}
     </div>
   );
 }

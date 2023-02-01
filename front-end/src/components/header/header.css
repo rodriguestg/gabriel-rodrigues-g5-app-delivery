@@ -1,0 +1,19 @@
+.header-order-details {
+  display: flex;
+  justify-content: space-around;
+  padding: 0% 5%;
+}
+
+.btn {
+  background-color: var(--orange);
+  border-radius: 40px;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 8px;
+  width: fit-content;
+}
+
+.btn:hover {
+  cursor: pointer;
+}

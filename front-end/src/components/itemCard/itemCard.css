@@ -3,7 +3,7 @@
   border: 0.5px solid #1620264a;
   border-radius: 20px;
   display: flex;
-  height: 80px;
+  height: 100px;
   width: 85%;
 }
 
@@ -21,10 +21,16 @@
   width: 64px;
 }
 
+.item-name {
+  text-align: center;
+  width: 40%;
+}
+
 .item-info-container {
   align-items: center;
   display: flex;
   flex-direction: column;
+  gap: 6px;
   width: 100%;
 }
 
@@ -37,7 +43,12 @@
 
   .item-card {
     height: 140px;
-    max-width: 40%;
+    max-width: 60%;
+  }
+
+  .item-img {
+    height: 88px;
+    width: 88px;
   }
 
   .item-info-container {
