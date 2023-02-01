@@ -1,0 +1,77 @@
+:root {
+  --dark-blue: #162026;
+  --yellow: #F2E307;
+  --light-orange: #F2B90C;
+  --light: #F28A05;
+  --brown: #8C2B03;
+  --green: #47D000;
+  --light-green: #7DBD61;
+}
+
+* {
+  padding:0;
+  margin:0;
+  vertical-align:baseline;
+  list-style:none;
+  border:0
+}
+
+h1 {
+  font-size: 2.1875rem;
+}
+
+h2 {
+  font-size: 1.875rem;
+}
+
+h3 {
+  font-size: 1.5625rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+h6 {
+  font-size: 0.75;
+}
+
+p {
+  font-size: 0.625rem;
+}
+
+
+@media screen and ( min-width: 600px){
+  h1 {
+    font-size: 3.125rem;
+  }
+  
+  h2 {
+    font-size: 2.5rem;
+  }
+  
+  h3 {
+    font-size: 1.875rem;
+  }
+  
+  h4 {
+    font-size: 1.5625rem;
+  }
+  
+  h5 {
+    font-size: 1.25rem;
+  }
+  
+  h6 {
+    font-size: 1;
+  }
+  
+  p {
+    font-size: 0.75rem;
+  }
+}
+
