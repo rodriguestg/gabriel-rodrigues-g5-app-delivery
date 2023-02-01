@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import ItemTable from '../components/ItemTable';
-import NavBar from '../components/NavBar';
-import HeaderCustomer from '../components/HeaderCustomer';
-import HeaderSeller from '../components/HeaderSeller';
+import ItemCard from '../../components/itemCard/ItemCard';
+import NavBar from '../../components/NavBar';
+import HeaderCustomer from '../../components/HeaderCustomer';
+import HeaderSeller from '../../components/HeaderSeller';
 
 export default function OrderDetails() {
   const [order, setOrder] = useState(undefined);
@@ -57,27 +57,16 @@ export default function OrderDetails() {
             />
           )
       )}
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Descrição</th>
-            <th>Quantidade</th>
-            <th>Valor Unitário</th>
-            <th>Sub-total</th>
-          </tr>
-        </thead>
-        <tbody>
-          { order && order.products.map((product, index) => (
-            <ItemTable
-              item={ product }
-              path={ pathname }
-              index={ index }
-              key={ index }
-            />
-          ))}
-        </tbody>
-      </table>
+
+      { order && order.products.map((product, index) => (
+        <ItemCard
+          item={ product }
+          path={ pathname }
+          index={ index }
+          key={ index }
+        />
+      ))}
+
       { order && (
         <h2 data-testid={ `${path}_order_details__element-order-total-price` }>
           { (+order.totalPrice).toFixed(2).replaceAll('.', ',')}
