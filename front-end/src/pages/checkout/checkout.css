@@ -8,17 +8,28 @@
   flex-direction: column;
 }
 
-.details-address-title {
+.checkout-title {
   width: 90%;
   display: flex;
   align-self: center;
   padding-bottom: 1rem;
   font-size: 1.25rem;
   font-weight: 600;
+  padding-top: 1rem;
 }
 
 form, input, select, label {
   display: flex;
+}
+
+.total-value {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  width: 90%;
+  align-self: center;
+  justify-content: end;
+  margin: 20px;
 }
 
 input, select {
@@ -48,7 +59,7 @@ form {
 }
 
 .submit-order-button {
-  background-color: var(--light);
+  background-color: var(--orange);
   border: none;
   font-weight: 700;
   color: white;
@@ -69,33 +80,99 @@ form {
   background-color: var(--light-orange);
 }
 
-.separator-line {
+.checkout-separator {
   align-self: center;
   width: 90%;
-  border: 1px solid var(--dark-blue);
+  border: 0.5px solid #162026;
+}
+
+.cart-products-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout-cards-container {
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  align-self: center;
+}
+
+.checkout-cards-container * {
+  font-weight: 600;
+}
+
+.checkout-card-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 0.5px solid #1620264a;
+  border-radius: 20px;
+  padding: 5px 0px;
+}
+
+.checkout-item-img {
+  background-color: #f6f6f6;
+  height: 64px;
+  width: 64px;
+  margin-left: 5px;
+  border-radius: 18px;
+  padding: 5px
+}
+
+.checkout-card-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.checkout-card-values {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.trash-icon {
+  border: none;
+  background-color: white;
+  font-size: 1.5rem;
+  margin-right: 20px;
+  padding-top: 10px;
 }
 
 @media screen and ( min-width : 600px ) {
   .checkout-container {
     display: flex;
     flex-direction: row;
+    width: 100%;
   }
 
   .cart-products-container {
-    width: 55%;
+    width: 60%;
+    height: 92vh;
   }
 
   .details-address-container {
-    position: fixed;
-    right: 0;
-    top: 30vh;
-    width: 45%;
+    width: 40%;
     align-self: center;
+    padding-left: 12px;
   }
 
-  .separator-line {
-    align-self: center;
-    height: 90%;
-    border-right: 1px solid red;
+  .checkout-card-info {
+    flex-direction: row;
+    gap: 30px;
+  }
+
+  .checkout-cards-container {
+    overflow: scroll;
+    height: 80%;
+  }
+
+  .checkout-separator {
+    height: 75vh;
+    width: 0;
+    border-left: 1px solid #162026;
   }
 }

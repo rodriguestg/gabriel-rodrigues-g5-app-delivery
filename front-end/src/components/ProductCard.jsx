@@ -4,6 +4,7 @@ import productContext from '../context/productContext';
 function ProductCard() {
   const { products, increaseQuantity, decreaseQuantity, cart,
     changeQuantity } = useContext(productContext);
+
   return (
     <div>
       {

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { IoTrashOutline } from 'react-icons/io5';
 import NavBar from '../../components/NavBar';
 import './checkout.css';
 
@@ -84,86 +85,100 @@ function Checkout() {
   };
 
   return (
-    <div>
+    <div className="checkout-page-container">
       {
         NavBar()
       }
       <div className="checkout-container">
         <div className="cart-products-container">
-          <h3>
+          <h5 className="checkout-title">
             Carrinho
-          </h3>
+          </h5>
           {
             loading ? (
               <div>
                 Carregando...
               </div>
             ) : (
-              <div>
+              <div className="checkout-cards-container">
                 {
                   products.map((item, index) => (
-                    <section key={ item.id }>
+                    <div key={ item.id } className="checkout-card-container">
                       <img
                         src={ item.urlImage }
-                        alt="imagem de um produto"
-                        srcSet=""
-                        width={ 100 }
+                        alt={ item.name }
+                        className="checkout-item-img"
                       />
-                      <div
-                        data-testid={
-                          `customer_checkout__element-order-table-name-${index}`
-                        }
-                      >
-                        {item.name}
-                      </div>
-                      <div
-                        data-testid={
-                          `customer_checkout__element-order-table-quantity-${index}`
-                        }
-                      >
-                        {item.quantity}
-                      </div>
-                      <div
-                        data-testid={
-                          `customer_checkout__element-order-table-unit-price-${index}`
-                        }
-                      >
-                        {item.price.toFixed(2).replaceAll('.', ',')}
-                      </div>
-                      <div
-                        data-testid={
-                          `customer_checkout__element-order-table-sub-total-${index}`
-                        }
-                      >
-                        {(item.price * item.quantity).toFixed(2).replaceAll('.', ',')}
-                      </div>
-                      <div
-                        data-testid={
-                          `customer_checkout__element-order-table-remove-${index}`
-                        }
-                      >
-                        <button
-                          type="button"
-                          onClick={ () => removeItem(item) }
+                      <div className="checkout-card-info">
+                        <h5
+                          data-testid={
+                            `customer_checkout__element-order-table-name-${index}`
+                          }
                         >
-                          Remover
-                        </button>
+                          {item.name}
+                        </h5>
+                        <div className="checkout-card-values">
+                          <h6
+                            data-testid={
+                              `customer_checkout__element-order-table-quantity-${index}`
+                            }
+                            className="text-orange"
+                          >
+                            R$
+                            {' '}
+                            {item.price.toFixed(2).replaceAll('.', ',')}
+                          </h6>
+                          <h6>X</h6>
+                          <h6
+                            data-testid={
+                              `customer_checkout__element-order-table-unit-price-${index}`
+                            }
+                          >
+                            {item.quantity}
+                          </h6>
+                          <h6>=</h6>
+                          <h6
+                            data-testid={
+                              `customer_checkout__element-order-table-sub-total-${index}`
+                            }
+                            className="text-orange"
+                          >
+                            R$
+                            {' '}
+                            {(item.price * item.quantity).toFixed(2).replaceAll('.', ',')}
+                          </h6>
+                        </div>
                       </div>
-                    </section>
+                      <button
+                        type="button"
+                        onClick={ () => removeItem(item) }
+                        className="trash-icon"
+                      >
+                        <IoTrashOutline />
+                      </button>
+                    </div>
                   ))
                 }
               </div>
             )
           }
-          <h2 data-testid="customer_checkout__element-order-total-price">
-            {total.toFixed(2).replaceAll('.', ',')}
-          </h2>
+          <h5
+            data-testid="customer_checkout__element-order-total-price"
+            className="total-value"
+          >
+            Total
+            <h5 className="text-orange">
+              R$
+              {' '}
+              {total.toFixed(2).replaceAll('.', ',')}
+            </h5>
+          </h5>
         </div>
 
-        <div className="separator-line" />
+        <div className="checkout-separator" />
 
         <div className="details-address-container">
-          <h5 className="details-address-title">
+          <h5 className="checkout-title">
             Detalhes e endereço para entrega
           </h5>
           <form onSubmit={ handleSubmit(finishOrder) }>

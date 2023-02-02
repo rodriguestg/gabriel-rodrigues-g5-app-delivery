@@ -2,7 +2,6 @@ import React from 'react';
 import './itemCard.css';
 
 export default function ItemCard({ item, path, index }) {
-  console.log(item);
   return (
 
     <div key={ item.id } className="item-card">
