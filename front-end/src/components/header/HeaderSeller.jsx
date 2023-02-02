@@ -2,12 +2,12 @@ import axios from 'axios';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-function HeaderSeller({ date, status, updatePage }) {
+function HeaderSeller({ date, order, updatePage }) {
   const { id } = useParams();
 
   const updateOrder = async () => {
     const url = 'http://localhost:3001/sales';
-    if (status === 'Pendente') {
+    if (order.status === 'Pendente') {
       await axios.patch(url, { status: 'Preparando', id });
     } else {
       await axios.patch(url, { status: 'Em Trânsito', id });
@@ -17,24 +17,29 @@ function HeaderSeller({ date, status, updatePage }) {
   };
 
   return (
-    <div>
-      <span data-testid="seller_order_details__element-order-details-label-order-id">
-        PEDIDO
-        { id }
-      </span>
-      <span data-testid="seller_order_details__element-order-details-label-order-date">
-        { date }
-      </span>
+    <div className="header-order-details">
+      <div>
+        <h4>Detalhes do pedido</h4>
+        <span
+          data-testid={ `customer_order_details__element
+        -order-details-label-seller-name` }
+        >
+          Vendedor(a):
+          { ` ${order.seller.name}` }
+          <br />
+        </span>
+        <span>
+          Data:
+          {' '}
+          { date }
+        </span>
+      </div>
 
-      <span
-        data-testid="seller_order_details__element-order-details-label-delivery-status"
-      >
-        { status }
-      </span>
       <button
         data-testid="seller_order_details__button-preparing-check"
         type="button"
-        disabled={ status !== 'Pendente' }
+        className="btn"
+        disabled={ order.status !== 'Pendente' }
         onClick={ updateOrder }
       >
         PREPARAR PEDIDO
@@ -42,7 +47,8 @@ function HeaderSeller({ date, status, updatePage }) {
       <button
         data-testid="seller_order_details__button-dispatch-check"
         type="button"
-        disabled={ status !== 'Preparando' }
+        className="btn"
+        disabled={ order.status !== 'Preparando' }
         onClick={ updateOrder }
       >
         SAIU PARA ENTREGA

@@ -37,6 +37,7 @@ function HeaderCustomer({ seller, updatePage }) {
       >
         MARCAR COMO ENTREGUE
       </button>
+
     </div>
   );
 }

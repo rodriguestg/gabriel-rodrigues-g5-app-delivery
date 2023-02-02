@@ -1,7 +1,8 @@
 .header-order-details {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   padding: 0% 5%;
+  width: 100%;
 }
 
 .btn {
@@ -10,10 +11,12 @@
   color: white;
   font-size: 0.75rem;
   font-weight: 500;
-  padding: 8px;
-  width: fit-content;
+  height: fit-content;
+  padding: 16px 20px;
+  transition-duration: 0.3s;
 }
 
 .btn:hover {
+  background-color: var(--orange-hover);
   cursor: pointer;
 }

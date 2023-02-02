@@ -6,6 +6,7 @@ import NavBar from '../../components/NavBar';
 import HeaderCustomer from '../../components/header/HeaderCustomer';
 import HeaderSeller from '../../components/header/HeaderSeller';
 import './orderDetails.css';
+import StepProgressBar from '../../components/stepProgressBar/StepProgressBar';
 
 export default function OrderDetails() {
   const [order, setOrder] = useState(undefined);
@@ -42,23 +43,25 @@ export default function OrderDetails() {
   return (
     <div>
       <NavBar />
-      { order && (
-        path === 'customer'
-          ? (
-            <HeaderCustomer
-              seller={ order }
-              date={ returnDate() }
-              updatePage={ getOrder }
-            />
-          ) : (
-            <HeaderSeller
-              date={ returnDate() }
-              status={ order.status }
-              updatePage={ getOrder }
-            />
-          )
-      )}
       <main className="item-card-container">
+        { order && (
+          path === 'customer'
+            ? (
+              <HeaderCustomer
+                seller={ order }
+                date={ returnDate() }
+                updatePage={ getOrder }
+              />
+            ) : (
+              <HeaderSeller
+                date={ returnDate() }
+                order={ order }
+                updatePage={ getOrder }
+              />
+            )
+        )}
+        { order
+      && <StepProgressBar status={ order.status } /> }
         { order && order.products.map((product, index) => (
           <ItemCard
             item={ product }
