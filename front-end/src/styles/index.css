@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap') ;
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
 
 :root {
 
@@ -8,7 +8,9 @@
 
   --light-orange: #f2b90c;
 
-  --light: #f28a05;
+  --orange: #f28a05;
+
+  --orange-hover: #f5a337;
 
   --brown: #8c2b03;
 
@@ -47,7 +49,7 @@ h5 {
 }
 
 h6 {
-  font-size: 0.75;
+  font-size: 0.75rem;
 }
 
 p {
@@ -78,7 +80,7 @@ p {
   }
 
   h6 {
-    font-size: 1;
+    font-size: 1rem;
   }
 
   p {

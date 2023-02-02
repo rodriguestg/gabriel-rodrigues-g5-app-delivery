@@ -1,0 +1,27 @@
+.item-card-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.total-price-order {
+  margin-left: 50%;
+}
+
+.total-span {
+  font-weight: 600;
+}
+
+.price-span {
+  color: var(--orange);
+}
+
+@media screen and ( min-width : 600px ) {
+
+  .item-card-container {
+    gap: 32px;
+  }
+}
