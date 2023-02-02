@@ -173,7 +173,7 @@ form {
   }
 
   .checkout-cards-container {
-    overflow: scroll;
+    overflow-y: scroll;
     max-height: 75%;
   }
 
