@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import './header.css';
 
-function HeaderCustomer({ seller, date, updatePage }) {
+function HeaderCustomer({ seller, updatePage }) {
   const { id } = useParams();
 
   const updateOrder = async () => {
@@ -16,25 +17,19 @@ function HeaderCustomer({ seller, date, updatePage }) {
   };
 
   return (
-    <div>
-      <span data-testid="customer_order_details__element-order-details-label-order-id">
-        PEDIDO
-        { id }
-      </span>
-      <span data-testid="customer_order_details__element-order-details-label-seller-name">
-        { seller.seller.name }
-      </span>
-      <span data-testid="customer_order_details__element-order-details-label-order-date">
-        { date }
-      </span>
-
-      <span
-        data-testid={ `customer_order_details__element-order-details-label-delivery-status
-        -${seller.status}` }
-      >
-        { seller.status }
-      </span>
+    <div className="header-order-details">
+      <div>
+        <h4>Detalhes do pedido</h4>
+        <span
+          data-testid={ `customer_order_details__element
+        -order-details-label-seller-name` }
+        >
+          Vendedor(a):
+          { ` ${seller.seller.name}` }
+        </span>
+      </div>
       <button
+        className="btn"
         data-testid="customer_order_details__button-delivery-check"
         type="button"
         disabled={ seller.status !== 'Em Trânsito' }
@@ -42,6 +37,7 @@ function HeaderCustomer({ seller, date, updatePage }) {
       >
         MARCAR COMO ENTREGUE
       </button>
+
     </div>
   );
 }
