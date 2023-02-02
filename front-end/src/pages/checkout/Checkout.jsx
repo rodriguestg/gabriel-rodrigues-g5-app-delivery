@@ -166,12 +166,12 @@ function Checkout() {
             data-testid="customer_checkout__element-order-total-price"
             className="total-value"
           >
-            Total
-            <h5 className="text-orange">
+            <span>Total</span>
+            <span className="text-orange">
               R$
               {' '}
               {total.toFixed(2).replaceAll('.', ',')}
-            </h5>
+            </span>
           </h5>
         </div>
 
