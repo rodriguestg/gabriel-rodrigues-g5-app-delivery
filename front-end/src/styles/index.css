@@ -47,7 +47,11 @@ h5 {
 }
 
 h6 {
-  font-size: 0.75;
+  font-size: 0.75rem;
+}
+
+a {
+  font-size: 0.75rem;
 }
 
 p {
@@ -78,7 +82,11 @@ p {
   }
 
   h6 {
-    font-size: 1;
+    font-size: 1rem;
+  }
+
+  a {
+    font-size: 1rem;
   }
 
   p {
