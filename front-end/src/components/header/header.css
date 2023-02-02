@@ -20,3 +20,9 @@
   background-color: var(--orange-hover);
   cursor: pointer;
 }
+
+.btn:disabled {
+  cursor: default;
+  background-color: #F6F6F6;
+  color: rgb(140, 140, 140);
+}

@@ -17,8 +17,10 @@
 
 .item-img {
   background-color: #f6f6f6;
-  height: 64px;
-  width: 64px;
+  height: 90px;
+  width: 90px;
+  border-radius: 18px;
+  padding: 5px
 }
 
 .item-name {
@@ -47,8 +49,8 @@
   }
 
   .item-img {
-    height: 88px;
-    width: 88px;
+    height: 130px;
+    width: 130px;
   }
 
   .item-info-container {
