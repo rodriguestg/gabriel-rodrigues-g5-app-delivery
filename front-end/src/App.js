@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import admin from './pages/AdminPage';
-import Checkout from './pages/Checkout';
+import Checkout from './pages/checkout/Checkout';
 import Products from './pages/Products';
 import ProductProvider from './context/productProvider';
 import Login from './pages/Login';

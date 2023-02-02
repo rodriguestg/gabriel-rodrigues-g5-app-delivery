@@ -1,0 +1,101 @@
+.checkout-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.details-address-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.details-address-title {
+  width: 90%;
+  display: flex;
+  align-self: center;
+  padding-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+form, input, select, label {
+  display: flex;
+}
+
+input, select {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  margin-top: 0.25rem;
+  padding: 0.60rem;
+  border-radius: 10px;
+  background-color: #F6F6F6;
+}
+
+select {
+  appearance: none;
+  cursor: pointer;
+}
+
+label {
+  width: 90%;
+  font-size: 1rem;
+  flex-direction: column;
+  color: #8F8F8F;
+}
+
+form {
+  flex-direction: column;
+  align-items: center;
+}
+
+.submit-order-button {
+  background-color: var(--light);
+  border: none;
+  font-weight: 700;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  border-radius: 30px;
+  width: 90%;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition-duration: 0.1s;
+}
+
+.submit-order-button:hover {
+  background-color: var(--light-orange);
+}
+
+.separator-line {
+  align-self: center;
+  width: 90%;
+  border: 1px solid var(--dark-blue);
+}
+
+@media screen and ( min-width : 600px ) {
+  .checkout-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .cart-products-container {
+    width: 55%;
+  }
+
+  .details-address-container {
+    position: fixed;
+    right: 0;
+    top: 30vh;
+    width: 45%;
+    align-self: center;
+  }
+
+  .separator-line {
+    align-self: center;
+    height: 90%;
+    border-right: 1px solid red;
+  }
+}
