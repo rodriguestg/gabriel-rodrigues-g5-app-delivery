@@ -9,7 +9,7 @@ import Login from './pages/login/Login';
 import SellerPage from './pages/SellerPage';
 import Register from './pages/register/Register';
 import OrderDetails from './pages/OrderDetails';
-import CustomerPage from './pages/CustomerPage';
+import CustomerPage from './pages/CustomerPage/CustomerPage';
 
 function App() {
   return (

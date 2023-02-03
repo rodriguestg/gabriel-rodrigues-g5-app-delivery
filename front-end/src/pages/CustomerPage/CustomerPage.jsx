@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import NavBar from '../components/NavBar';
-import OrderCard from '../components/OrderCard';
+import NavBar from '../../components/NavBar';
+import OrderCard from '../../components/OrderCard';
+import './customerPage.scoped.css';
 
 function CustomerPage() {
   const [sales, setSales] = useState([]);
@@ -19,10 +20,12 @@ function CustomerPage() {
   return (
     <div>
       <NavBar />
-      {
-        sales ? sales.map((sale) => (<OrderCard sale={ sale } key={ sale.id } />))
-          : <div>Carregando...</div>
-      }
+      <div className="orders">
+        {
+          sales ? sales.map((sale) => (<OrderCard sale={ sale } key={ sale.id } />))
+            : <div>Carregando...</div>
+        }
+      </div>
 
     </div>
   );

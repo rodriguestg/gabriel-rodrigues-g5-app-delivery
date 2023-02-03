@@ -20,11 +20,10 @@ export default function SellerPage() {
   return (
     <div>
       <NavBar />
-      <main>
+      <div className="orders">
         { sales.length
          && sales.map((sale) => <OrderCard sale={ sale } key={ sale.id } />)}
-
-      </main>
+      </div>
     </div>
   );
 }
