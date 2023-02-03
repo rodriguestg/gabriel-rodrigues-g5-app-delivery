@@ -91,6 +91,7 @@ export default function Login() {
             data-testid="common_login__button-login"
             type="submit"
             disabled={ Button }
+            className="button-login"
           >
             Login
           </button>
@@ -100,6 +101,7 @@ export default function Login() {
             <button
               data-testid="common_login__button-register"
               type="button"
+              className="button-login"
             >
               Ainda não tenho conta
             </button>

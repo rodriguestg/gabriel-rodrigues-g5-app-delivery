@@ -45,7 +45,7 @@
   overflow: hidden;
 }
 
-button {
+.register-button {
   background: linear-gradient(270deg, #F28A05 69.79%, rgba(242, 138, 5, 0.5) 100%);
   border-radius: 20px;
   color: white;

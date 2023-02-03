@@ -96,6 +96,7 @@ export default function Register() {
             data-testid="common_register__button-register"
             type="submit"
             disabled={ Button }
+            className="register-button"
           >
             Cadastrar
           </button>
