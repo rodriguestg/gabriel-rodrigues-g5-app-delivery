@@ -1,0 +1,28 @@
+.header-order-details {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0% 5%;
+  width: 100%;
+}
+
+.btn {
+  background-color: var(--orange);
+  border-radius: 40px;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 500;
+  height: fit-content;
+  padding: 16px 20px;
+  transition-duration: 0.3s;
+}
+
+.btn:hover {
+  background-color: var(--orange-hover);
+  cursor: pointer;
+}
+
+.btn:disabled {
+  cursor: default;
+  background-color: #F6F6F6;
+  color: rgb(140, 140, 140);
+}

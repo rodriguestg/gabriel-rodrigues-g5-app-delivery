@@ -10,11 +10,12 @@ function ProductProvider({ children }) {
   const history = useHistory();
 
   const createEmptyCart = (data) => {
-    const emptyCart = data.map(({ id, name, price }) => ({
+    const emptyCart = data.map(({ id, name, price, urlImage }) => ({
       id,
       name,
       quantity: 0,
       price: Number(price),
+      urlImage,
     }));
     setCart(emptyCart);
   };
