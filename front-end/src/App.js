@@ -8,7 +8,7 @@ import ProductProvider from './context/productProvider';
 import Login from './pages/login/Login';
 import SellerPage from './pages/SellerPage';
 import Register from './pages/register/Register';
-import OrderDetails from './pages/OrderDetails';
+import OrderDetails from './pages/orderDetails/OrderDetails';
 import CustomerPage from './pages/CustomerPage/CustomerPage';
 
 function App() {
