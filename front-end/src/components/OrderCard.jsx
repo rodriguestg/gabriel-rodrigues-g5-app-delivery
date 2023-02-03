@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import { SlWallet } from 'react-icons/sl';
+import { IoCalendarOutline } from 'react-icons/io5';
 
 export default function OrderCard({ sale }) {
   const { id,
@@ -25,32 +27,70 @@ export default function OrderCard({ sale }) {
     }
   };
 
+  const changeColorStatus = () => {
+    const statusList = document.getElementsByClassName('order-status');
+    for (let i = 0; i < statusList.length; i += 1) {
+      if (statusList[i].innerText === 'Pendente') {
+        statusList[i].style.backgroundColor = 'red';
+      } else if (statusList[i].innerText === 'Em Trânsito') {
+        statusList[i].style.backgroundColor = '#f28a05';
+      } else {
+        statusList[i].style.backgroundColor = '#7dbd61';
+      }
+    }
+  };
+
+  useEffect(() => {
+    changeColorStatus();
+  }, []);
+
   return (
     <button
+      className="order-card"
       onClick={ () => (currentPath === 'seller' ? history.push(`/seller/orders/${id}`)
         : history.push(`/customer/orders/${id}`)) }
       type="button"
     >
-      <p
-        data-testid={ `${currentPath}_orders__element-order-id-${id}` }
-      >
-        {id}
-      </p>
-      <p data-testid={ `${currentPath}_orders__element-delivery-status-${id}` }>
-        {status}
-      </p>
-      {currentPath === 'seller'
-        ? (
-          <p data-testid={ `$seller_orders__element-card-address-${id}` }>
-            {`${deliveryAddress}, ${deliveryNumber}`}
-          </p>)
-        : null }
-      <p data-testid={ `${currentPath}_orders__element-order-date-${id}` }>
-        {returnDate()}
-      </p>
-      <p data-testid={ `${currentPath}_orders__element-card-price-${id}` }>
-        {totalPrice.replace('.', ',')}
-      </p>
+      <div className="status-container">
+        <p
+          className="order-status"
+          data-testid={ `${currentPath}_orders__element-delivery-status-${id}` }
+        >
+          {status}
+        </p>
+        <div className="order-price">
+          <SlWallet />
+          <p
+            data-testid={ `${currentPath}_orders__element-card-price-${id}` }
+          >
+            R$
+            {totalPrice.replace('.', ',')}
+          </p>
+        </div>
+        <div className="order-date">
+          <IoCalendarOutline />
+          <p
+            data-testid={ `${currentPath}_orders__element-order-date-${id}` }
+          >
+            {returnDate()}
+          </p>
+        </div>
+      </div>
+      <div className="info-container">
+        <p
+          className="order-id"
+          data-testid={ `${currentPath}_orders__element-order-id-${id}` }
+        >
+          #000
+          {id}
+        </p>
+        {currentPath === 'seller'
+          ? (
+            <p data-testid={ `$seller_orders__element-card-address-${id}` }>
+              {`${deliveryAddress}, ${deliveryNumber}`}
+            </p>)
+          : null }
+      </div>
     </button>
 
   );
