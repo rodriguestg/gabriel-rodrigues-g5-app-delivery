@@ -1,0 +1,92 @@
+.box-products {
+  align-items: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 100px;
+}
+
+.box-card-products {
+  align-items: center;
+  background-image: linear-gradient(#162026d6, #162026, #162026);
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 65px 20px;
+  padding: 30px 10px;
+  position: relative;
+  width: 225px;
+}
+
+.box-btn-add-remove-products {
+  align-items: center;
+  background-color: white;
+  border-radius: 90px;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+}
+
+.btn-add-remove {
+  color: #F28A05;
+  background-color: #ffffff00;
+  font-size: 25px;
+  font-weight: bold;
+  padding: 30px;
+}
+
+.inp-value-products {
+  background-color: #ffffff00;
+  margin: 0;
+  padding-left: 25px;
+  width: 25px;
+}
+
+.img-custumer {
+  width: 60%;
+}
+
+.img-product {
+  padding: 0.5em;
+  position: absolute;
+  top: -108px;
+  width: 200px;
+}
+
+.title-product {
+  color: #F6F6F6;
+  font-size: 30px;
+  font-weight: bold;
+  padding-top: 80px;
+  text-align: center;
+}
+
+.price-product {
+  color: #F28A05;
+  font-size: 26px;
+  font-weight: 650;
+  padding-bottom: 15px;
+}
+
+.btn-cart {
+  background-color: #F28A05;
+  border-radius: 40px;
+  color: white;
+  font-size: 20px;
+  margin-bottom: 60px;
+  margin-right: 150px;
+  padding: 10px;
+  width: 340px;
+  float: right;
+}
+
+.btn-cart:hover {
+  background-color: #162026;
+  transition: 0.8s;
+}
+
+.btn-cart-text {
+  font-size: 30px;
+  font-weight: bold;
+}
