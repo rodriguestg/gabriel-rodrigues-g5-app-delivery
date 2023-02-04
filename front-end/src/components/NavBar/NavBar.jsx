@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 // import getUserLocalStorage from '../utils/userLocalStorage';
+import './NavBar.css';
 
 export default function NavBar() {
   const history = useHistory();
@@ -12,7 +13,10 @@ export default function NavBar() {
   };
 
   const nameTag = (
-    <p data-testid="customer_products__element-navbar-user-full-name">
+    <p
+      className="a-navbar"
+      data-testid="customer_products__element-navbar-user-full-name"
+    >
       { user.name }
     </p>
   );
@@ -21,6 +25,7 @@ export default function NavBar() {
       type="button"
       onClick={ clearLocalStorage }
       data-testid="customer_products__element-navbar-link-logout"
+      className="btn-logout"
     >
       Logout
     </button>
@@ -28,21 +33,25 @@ export default function NavBar() {
 
   if (user.role === 'customer') {
     return (
-      <div>
+      <div className="navbar">
         <Link
           to="/customer/products"
           data-testid="customer_products__element-navbar-link-products"
+          className="a-navbar"
         >
           Produtos
         </Link>
         <Link
           to="/customer/orders"
           data-testid="customer_products__element-navbar-link-orders"
+          className="a-navbar"
         >
           Meus Pedidos
         </Link>
         {nameTag}
-        {logoutTag}
+        <div className="box-logout">
+          {logoutTag}
+        </div>
       </div>
     );
   } if (user.role === 'seller') {

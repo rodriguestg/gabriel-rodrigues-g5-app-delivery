@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import ItemCard from '../../components/itemCard/ItemCard';
-import NavBar from '../../components/NavBar';
+import NavBar from '../../components/NavBar/NavBar';
 import HeaderCustomer from '../../components/header/HeaderCustomer';
 import HeaderSeller from '../../components/header/HeaderSeller';
 import './orderDetails.css';

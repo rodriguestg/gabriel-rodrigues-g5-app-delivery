@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import productContext from '../context/productContext';
-import ProductCard from '../components/ProductCard';
-import NavBar from '../components/NavBar';
+import { BsCartFill } from 'react-icons/bs';
+import productContext from '../../context/productContext';
+import ProductCard from '../../components/ProductCard';
+import NavBar from '../../components/NavBar/NavBar';
+import './Products.css';
 
 export default function Products() {
   const history = useHistory();
@@ -23,11 +25,16 @@ export default function Products() {
         type="button"
         onClick={ saveCartToLocalStorage }
         disabled={ isCartEmpty() }
+        className="btn-cart"
       >
         <p
           data-testid="customer_products__checkout-bottom-value"
+          className="btn-cart-text"
         >
+          Carrinho R$
           {sum.toFixed(2).replace('.', ',')}
+          {' '}
+          <BsCartFill />
         </p>
       </button>
     </>

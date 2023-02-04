@@ -3,7 +3,7 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import admin from './pages/adminPage/AdminPage';
 import Checkout from './pages/checkout/Checkout';
-import Products from './pages/Products';
+import Products from './pages/Products/Products';
 import ProductProvider from './context/productProvider';
 import Login from './pages/login/Login';
 import SellerPage from './pages/SellerPage';
